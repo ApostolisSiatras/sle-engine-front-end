@@ -24,7 +24,7 @@ The browser calls `/api/llm/chat`. Vite's development proxy forwards that reques
 
 ## Adaptive exercises
 
-Each level catalogue entry defines exactly one tag (`Beginner`, `Intermediate`, or `Pro`) and an objective. The current supplied exercise remains visible in its original sandboxed HTML. The React exercise surface records attempts, answers, correctness, hints, and missed concepts. After an incorrect answer, **Try adapted variation** requests a different short-answer exercise variation that targets that concept while remaining within the selected level. Completing an attempt enables **Retry level**. State is intentionally in-memory only and resets on refresh.
+Each level catalogue entry defines exactly one tag (`Beginner`, `Intermediate`, or `Pro`) and an objective. Learners begin at Level 2; later levels remain locked until they pass the preceding level. A passing attempt requires at least three answered questions with 70% or higher correct. The current supplied exercise remains visible in its original sandboxed HTML. The React exercise surface records attempts, answers, correctness, hints, and missed concepts. After an incorrect answer, **Try adapted variation** requests a different short-answer exercise variation that targets that concept while remaining within the selected level. State is intentionally in-memory only and resets on refresh.
 
 The UI validates the required JSON fields before showing LLM output. It reports connection errors, malformed responses, and a 45-second timeout, each with a retry control. No invented fallback question is shown if the local model is unavailable.
 
