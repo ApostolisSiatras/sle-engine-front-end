@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samskrita Swayam-Shikshaka - Home</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;800&family=Playfair+Display:wght@600;700;800&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Premium Colour Palette */
+            --bg-main: #FAFAF9;
+            --card-bg: #FFFFFF;
+            --maroon-rich: #781014;
+            --maroon-light: #FFF0F0;
+            --accent-gold: #D4AF37;
+            --accent-gold-light: #FEF9C3;
+            --text-dark: #1C1917;
+            --text-muted: #57534E;
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(120, 16, 20, 0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+
+        /* Premium Top Navigation */
+        .top-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; margin-bottom: 40px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo-box {
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'Playfair Display', serif; font-weight: 800;
+            font-size: 1.5rem; color: var(--maroon-rich); text-decoration: none;
+        }
+
+        .lang-badge {
+            background: white; border: 1px solid #E7E5E4; color: var(--text-muted);
+            padding: 8px 16px; border-radius: 20px; font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03); letter-spacing: 1px;
+        }
+
+        /* Hero Section with Branding */
+        header { text-align: center; margin-bottom: 60px; padding-top: 20px; }
+        
+        .collaboration-badge {
+            display: inline-block; background: linear-gradient(135deg, var(--maroon-rich) 0%, #9F1239 100%);
+            color: white; padding: 8px 25px; border-radius: 30px;
+            font-size: 0.95rem; font-weight: 600; letter-spacing: 1px;
+            margin-bottom: 25px; box-shadow: 0 4px 15px rgba(120, 16, 20, 0.2);
+        }
+        
+        .collab-gold { color: var(--accent-gold-light); font-weight: 800; }
+
+        h1 { font-family: 'Playfair Display', serif; color: var(--maroon-rich); font-size: 3.5rem; margin-bottom: 15px; line-height: 1.2; font-weight: 800; }
+        .subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 30px auto; font-weight: 400; }
+
+        .motto-box {
+            text-align: center; background: var(--maroon-light);
+            border-left: 4px solid var(--accent-gold); padding: 20px; border-radius: 12px;
+            max-width: 600px; margin: 0 auto;
+        }
+        .motto-sk { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.8rem; color: var(--maroon-rich); font-weight: bold; display: block; margin-bottom: 5px; }
+
+        /* Level Grid */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px; padding: 20px 0;
+        }
+
+        .level-card {
+            background: var(--card-bg); border-radius: 20px; padding: 30px;
+            box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.03);
+            text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .level-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--maroon-rich); transition: width 0.3s ease;
+        }
+        .level-card:hover::before { width: 8px; background: var(--accent-gold); }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-left: 10px; }
+        .l-num { font-size: 0.95rem; font-weight: 800; color: var(--maroon-rich); background: var(--maroon-light); padding: 6px 15px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase;}
+        .l-icon { font-size: 2rem; background: var(--bg-main); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 12px;}
+
+        .l-title-sk { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.6rem; color: var(--maroon-rich); margin-bottom: 8px; padding-left: 10px; font-weight: bold;}
+        .l-desc-en { font-size: 1.05rem; color: var(--text-muted); padding-left: 10px; line-height: 1.5; font-weight: 500;}
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .level-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="#" class="logo-box">
+            <span style="font-size: 2rem;">🕉️</span> Samskrita
+        </a>
+        <div class="lang-badge">EN 🇬🇧</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header>
+        <!-- Prominent Branding Badge -->
+        <div class="collaboration-badge">
+            A collaborative initiative by <span class="collab-gold">Topper Institute</span> & <span class="collab-gold">Team Trayee</span>
+        </div>
+
+        <h1>Swayam-Shikshaka</h1>
+        <p class="subtitle">
+            Your premium digital guide to mastering Sanskrit grammar and conversation. Embark on an intuitive, interactive journey tailored for modern learners.
+        </p>
+
+        <div class="motto-box">
+            <span class="motto-sk">श्रुतेन यत्नेन च वागुपासिता<br>ध्रुवं करोत्येव कमप्यनुग्रहम्</span>
+            <span class="diacritic" style="display:block; margin-top:8px; font-weight:700; color:#9F1239;">
+                Śrutena yatnena ca vāgupāsitā dhruvaṃ karotyeva kamapyanugraham
+            </span>
+            <span style="color:var(--text-muted); font-weight: 600; display:inline-block; margin-top:8px; font-size: 0.95rem;">
+                "Language, when pursued with attentive learning and sincere effort, undoubtedly bestows an indescribable grace."
+            </span>
+        </div>
+    </header>
+
+    <!-- LEVEL GRID (Levels 1 to 25) -->
+    <div class="level-grid">
+        
+        <!-- Module 1: Basics & Verbs -->
+        <a href="level1.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 1</span><span class="l-icon">👋</span></div>
+            <div class="l-title-sk">अहं, त्वं, कः, का</div>
+            <div class="l-desc-en">Self Introduction: Master the art of introducing yourself and asking questions.</div>
+        </a>
+
+        <a href="level2.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 2</span><span class="l-icon">✨</span></div>
+            <div class="l-title-sk">अस्ति, असि, अस्मि</div>
+            <div class="l-desc-en">The "To Be" Verbs: Learn to construct complete sentences indicating existence.</div>
+        </a>
+
+        <a href="level3.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 3</span><span class="l-icon">👉</span></div>
+            <div class="l-title-sk">सः, सा, तत्</div>
+            <div class="l-desc-en">Pronouns (Far): How to refer to people and objects at a distance (He, She, It).</div>
+        </a>
+
+        <a href="level4.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 4</span><span class="l-icon">👇</span></div>
+            <div class="l-title-sk">एषः, एषा, एतत्</div>
+            <div class="l-desc-en">Pronouns (Near): How to refer to people and objects close to you.</div>
+        </a>
+
+        <a href="level5.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 5</span><span class="l-icon">📍</span></div>
+            <div class="l-title-sk">अयम्, इयम्, इदम्</div>
+            <div class="l-desc-en">Alternative Pronouns: Another classical way to say 'This' in all three genders.</div>
+        </a>
+
+        <a href="level6.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 6</span><span class="l-icon">❓</span></div>
+            <div class="l-title-sk">कः, का, किम्</div>
+            <div class="l-desc-en">Question Words: Mastering "Who?" and "What?" across masculine, feminine, and neuter.</div>
+        </a>
+
+        <a href="level7.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 7</span><span class="l-icon">🌳</span></div>
+            <div class="l-title-sk">अकारान्त-शब्दाः</div>
+            <div class="l-desc-en">a-ending Nouns: Understanding the Nominative singular form for masculine and neuter words.</div>
+        </a>
+
+        <a href="level8.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 8</span><span class="l-icon">🌸</span></div>
+            <div class="l-title-sk">आकारान्त-शब्दाः</div>
+            <div class="l-desc-en">ā-ending Nouns: Understanding the Nominative singular form for feminine words.</div>
+        </a>
+
+        <a href="level9.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 9</span><span class="l-icon">🏃</span></div>
+            <div class="l-title-sk">वर्तमानकालः (लट्लकारः)</div>
+            <div class="l-desc-en">Present Tense: Introduction to action words (verbs) for all three persons.</div>
+        </a>
+
+        <a href="level10.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 10</span><span class="l-icon">🎯</span></div>
+            <div class="l-title-sk">धातवः - भागः १</div>
+            <div class="l-desc-en">Action Words (Set 1): Learn common daily verbs like play, roam, run, and fall.</div>
+        </a>
+
+        <a href="level11.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 11</span><span class="l-icon">🗣️</span></div>
+            <div class="l-title-sk">धातवः - भागः २</div>
+            <div class="l-desc-en">Action Words (Set 2): Learn common verbs like speak, eat, laugh, and protect.</div>
+        </a>
+
+        <a href="level12.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 12</span><span class="l-icon">🌅</span></div>
+            <div class="l-title-sk">भविष्यत्कालः (लृट्लकारः)</div>
+            <div class="l-desc-en">Future Tense: Expressing actions that will happen tomorrow and the day after.</div>
+        </a>
+
+        <a href="level13.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 13</span><span class="l-icon">🔮</span></div>
+            <div class="l-title-sk">लृट्लकारः - अन्ये धातवः</div>
+            <div class="l-desc-en">Future Tense Expansion: Applying the future tense rules to the remaining verbs.</div>
+        </a>
+
+        <a href="level14.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 14</span><span class="l-icon">🕰️</span></div>
+            <div class="l-title-sk">भूतकालः (लङ्लकारः)</div>
+            <div class="l-desc-en">Past Tense (Third Person): Talking about actions that occurred yesterday.</div>
+        </a>
+
+        <a href="level15.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 15</span><span class="l-icon">⏪</span></div>
+            <div class="l-title-sk">लङ्लकारः (मध्यमपुरुषः)</div>
+            <div class="l-desc-en">Past Tense (Second Person): Expressing what 'You' did in the past.</div>
+        </a>
+
+        <a href="level16.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 16</span><span class="l-icon">📝</span></div>
+            <div class="l-title-sk">लङ्लकारः (उत्तमपुरुषः)</div>
+            <div class="l-desc-en">Past Tense (First Person): Expressing what 'I' did in the past.</div>
+        </a>
+
+        <a href="level17.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 17</span><span class="l-icon">🙏</span></div>
+            <div class="l-title-sk">आज्ञा / प्रार्थना (लोट्लकारः)</div>
+            <div class="l-desc-en">Imperative Mood: How to give commands and make polite requests.</div>
+        </a>
+
+        <a href="level18.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 18</span><span class="l-icon">🛠️</span></div>
+            <div class="l-title-sk">कृ-धातुः (वर्तमानकालः)</div>
+            <div class="l-desc-en">The 'To Do' Verb: Mastering the versatile 'kRi' root in the present tense.</div>
+        </a>
+
+        <a href="level19.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 19</span><span class="l-icon">🚀</span></div>
+            <div class="l-title-sk">कृ-धातुः (भविष्यत्कालः)</div>
+            <div class="l-desc-en">The 'To Do' Verb (Future): Expressing tasks and actions you will do.</div>
+        </a>
+
+        <a href="level20.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 20</span><span class="l-icon">📜</span></div>
+            <div class="l-title-sk">कृ-धातुः (भूतकालः)</div>
+            <div class="l-desc-en">The 'To Do' Verb (Past): Expressing tasks and actions that were completed.</div>
+        </a>
+
+        <a href="level21.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 21</span><span class="l-icon">📍</span></div>
+            <div class="l-title-sk">अत्र, तत्र</div>
+            <div class="l-desc-en">Adverbs of Place (Part 1): Using 'Here' and 'There' to indicate location.</div>
+        </a>
+
+        <a href="level22.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 22</span><span class="l-icon">🌍</span></div>
+            <div class="l-title-sk">एकत्र, अन्यत्र</div>
+            <div class="l-desc-en">Adverbs of Place (Part 2): Saying 'In one place' and 'Elsewhere'.</div>
+        </a>
+
+        <a href="level23.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 23</span><span class="l-icon">🌌</span></div>
+            <div class="l-title-sk">बहुत्र, सर्वत्र</div>
+            <div class="l-desc-en">Adverbs of Place (Part 3): Expressing 'In many places' and 'Everywhere'.</div>
+        </a>
+
+        <a href="level24.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 24</span><span class="l-icon">🤔</span></div>
+            <div class="l-title-sk">प्रश्न-वाचकानि (अपि / किम्)</div>
+            <div class="l-desc-en">Classical Question Particles: Forming Yes/No questions using classical markers.</div>
+        </a>
+
+        <a href="level25.html" class="level-card">
+            <div class="card-header"><span class="l-num">Level 25</span><span class="l-icon">🛑</span></div>
+            <div class="l-title-sk">नञ्-अव्ययम्</div>
+            <div class="l-desc-en">Negative Particles: Learning how to negate sentences and express 'No' or 'Not'.</div>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

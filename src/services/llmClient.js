@@ -1,0 +1,28 @@
+const CHAT_ENDPOINT = '/api/llm/chat';
+const REQUEST_TIMEOUT_MS = 45_000;
+export class LlmConnectionError extends Error {}
+
+const generatorInstruction = `You are an invisible adaptive exercise editor. You do not speak directly to the learner and you do not create chat responses. Given a level tag, learning objective, existing exercise context, learner result, and prior mistakes, return a structured edited exercise only. Keep the same educational topic and short-answer exercise type. When learnerMistakes is not empty, targetedConcept must address one of those mistakes. Match Beginner, Intermediate, or Pro difficulty. If repeated errors occur, simplify the task and add an optional hint. Never introduce material outside the supplied level.`;
+
+function parse(text) { try { return JSON.parse(text.trim().replace(/^\x60\x60\x60(?:json)?\s*/i, '').replace(/\s*\x60\x60\x60$/, '')); } catch { throw new LlmConnectionError('The local LLM did not return valid structured JSON. Retry the request.'); } }
+function question(value, fallbackAdaptation) { if (!value || typeof value.questionText !== 'string' || typeof value.expectedAnswerGuidance !== 'string' || typeof value.targetedConcept !== 'string') throw new LlmConnectionError('The local LLM returned an incomplete question. Retry the request.'); const rawAdaptation = String(value.adaptation || '').toLowerCase(); const adaptation = ['standard', 'simplified', 'missed-concept', 'increased-challenge'].includes(rawAdaptation) ? rawAdaptation : rawAdaptation.includes('miss') ? 'missed-concept' : rawAdaptation.includes('simpl') ? 'simplified' : rawAdaptation.includes('challenge') ? 'increased-challenge' : fallbackAdaptation; return { questionText: value.questionText.trim(), expectedAnswerGuidance: value.expectedAnswerGuidance.trim(), targetedConcept: value.targetedConcept.trim(), hint: typeof value.hint === 'string' ? value.hint.trim() : '', adaptation }; }
+function feedback(value) { if (!value || typeof value.isCorrect !== 'boolean' || typeof value.feedback !== 'string') throw new LlmConnectionError('The local LLM returned incomplete answer feedback. Retry the request.'); return { isCorrect: value.isCorrect, feedback: value.feedback.trim(), mistakeCategory: typeof value.mistakeCategory === 'string' ? value.mistakeCategory.trim() : '', hint: typeof value.hint === 'string' ? value.hint.trim() : '' }; }
+
+async function chat(messages) {
+  const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    const response = await fetch(CHAT_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal, body: JSON.stringify({ model: __LOCAL_LLM_MODEL__ || undefined, temperature: 0.25, messages }) });
+    if (!response.ok) { const detail = await response.text().catch(() => ''); throw new LlmConnectionError(`The local LLM returned ${response.status}${detail ? `: ${detail.slice(0, 180)}` : ''}`); }
+    const body = await response.json(); const text = body.choices?.[0]?.message?.content ?? body.response ?? body.content;
+    if (typeof text !== 'string') throw new LlmConnectionError('The local LLM returned an unrecognised response format.');
+    return parse(text);
+  } catch (error) {
+    if (error instanceof LlmConnectionError) throw error;
+    if (error.name === 'AbortError') throw new LlmConnectionError('The local LLM took longer than 45 seconds. Retry when the model is ready.');
+    throw new LlmConnectionError('Could not reach the local LLM. Check that it is running and the local endpoint settings are correct.');
+  } finally { clearTimeout(timer); }
+}
+
+export async function loadLevelText(file) { const response = await fetch(file); if (!response.ok) throw new LlmConnectionError('The supplied level content could not be read for question generation.'); const document = new DOMParser().parseFromString(await response.text(), 'text/html'); return (document.body.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 14_000); }
+export async function generateQuestion({ level, levelText, attemptNumber, priorQuestions, mistakes, correctStreak }) { const fallbackAdaptation = mistakes.length ? 'missed-concept' : correctStreak >= 2 ? 'increased-challenge' : 'standard'; return question(await chat([{ role: 'system', content: generatorInstruction }, { role: 'user', content: JSON.stringify({ task: 'generate_question', level: { id: level.id, title: level.title, difficulty: level.difficulty, learningObjective: level.objective }, levelContent: levelText, attemptNumber, priorQuestions, learnerMistakes: mistakes, correctStreak, requiredJson: { questionText: 'string', expectedAnswerGuidance: 'string', difficulty: level.difficulty, targetedConcept: 'string', hint: 'string optional', adaptation: 'Use exactly one of: standard, simplified, missed-concept, increased-challenge' } }) }]), fallbackAdaptation); }
+export async function evaluateAnswer({ level, question: activeQuestion, learnerAnswer, attemptNumber, mistakes }) { return feedback(await chat([{ role: 'system', content: 'You are a Sanskrit learning-level answer evaluator. Assess only against the provided active-level question and objective. Return structured output only. Be supportive, specific, and proportional to the learner difficulty. Do not introduce material outside the level.' }, { role: 'user', content: JSON.stringify({ task: 'evaluate_answer', level: { id: level.id, difficulty: level.difficulty, learningObjective: level.objective }, attemptNumber, question: activeQuestion, learnerAnswer, priorMistakes: mistakes, requiredJson: { isCorrect: 'boolean', feedback: 'string', mistakeCategory: 'string or empty', hint: 'string or empty' } }) }])); }

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samskrita Level 12 - Present Tense Plural Verbs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;600;800&family=Laila:wght@400;600;700&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-parchment: #fdf5e6;
+            --text-brown: #4a2511;
+            --text-maroon: #800000;
+            --accent-gold: #d4af37;
+            --card-bg: #ffffff;
+            --success-green: #22c55e;
+            --error-red: #ef4444;
+            --verb-red: #991b1b;
+            --verb-light: #fef2f2;
+            --masc-blue: #1e3a8a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body.lang-en .kn-text { display: none !important; }
+        body.lang-kn .en-text { display: none !important; }
+
+        body {
+            font-family: 'Laila', sans-serif;
+            background-color: var(--bg-parchment);
+            color: var(--text-brown);
+            line-height: 1.6;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px 20px 80px; }
+
+        /* Top Nav */
+        .top-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 25px; background: rgba(255, 255, 255, 0.4);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3); margin-bottom: 20px;
+        }
+
+        .logo-home { 
+            font-family: 'Laila', sans-serif; font-size: 1.1rem; color: var(--text-brown); 
+            font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 5px;
+            transition: transform 0.2s;
+        }
+        .logo-home:hover { transform: translateY(-2px); color: var(--text-maroon); }
+        
+        .lang-switch-btn {
+            background: #fff; border: 2px solid var(--accent-gold); color: var(--text-maroon);
+            padding: 6px 15px; border-radius: 20px; font-family: 'Laila', sans-serif; font-weight: 700;
+            cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s;
+        }
+        .lang-switch-btn:hover { background: rgba(212, 175, 55, 0.1); transform: translateY(-2px); }
+
+        header { text-align: center; margin-bottom: 30px; }
+        .level-badge { display: inline-block; background-color: var(--verb-red); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 1px;}
+        h1 { font-family: 'Inknut Antiqua', serif; color: var(--text-maroon); font-size: 2.3rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; color: #555; font-weight: 600; }
+
+        /* Magic Sutra Box */
+        .sutra-box {
+            background: linear-gradient(135deg, var(--verb-light) 0%, #fff 100%);
+            border: 3px dashed var(--verb-red);
+            border-radius: 15px; padding: 25px; text-align: center; margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(153, 27, 27, 0.1);
+        }
+        .sutra-title { font-family: 'Inknut Antiqua', serif; color: var(--verb-red); font-size: 1.6rem; margin-bottom: 10px; font-weight: 800;}
+        .magic-formula {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 15px; align-items: center;
+        }
+        .formula-row {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: #fff; padding: 10px 20px; border-radius: 12px; border: 2px solid #fca5a5;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); flex: 1; min-width: 250px;
+        }
+        .f-part { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.8rem; font-weight: bold; color: var(--text-brown); text-align: center;}
+        .f-arrow { font-size: 1.4rem; color: var(--verb-red); }
+
+        /* Subhashita Section */
+        .subhashita-card { background: linear-gradient(135deg, #fffcf5 0%, #fff3e0 100%); border: 2px solid var(--accent-gold); border-radius: 15px; padding: 30px; text-align: center; margin-bottom: 40px; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); }
+        .shloka { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.6rem; color: var(--text-maroon); line-height: 2; margin-bottom: 20px; }
+        .shloka-meaning { font-size: 1.05rem; color: #444; text-align: left; background: rgba(255,255,255,0.6); padding: 20px; border-radius: 10px; line-height: 1.8;}
+
+        /* Transformation Grid & Animations */
+        .transform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        
+        .t-box { 
+            background: #fdfdfd; border: 1px solid #eee; border-top: 5px solid var(--verb-red); 
+            padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: transform 0.3s; text-align: center; display: flex; flex-direction: column;
+        }
+        .t-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+        
+        .t-header { font-size: 1.1rem; font-weight: bold; color: #555; margin-bottom: 15px; border-bottom: 1px dashed #ddd; padding-bottom: 10px;}
+        .t-flow { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.6rem; color: var(--text-brown); font-weight: bold;}
+        
+        .animated-arrow { font-size: 1.5rem; color: var(--verb-red); animation: moveRight 1.5s infinite ease-in-out; }
+        @keyframes moveRight { 0% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 100% { transform: translateX(-4px); } }
+        
+        .word-result { background: var(--verb-light); border: 2px solid var(--verb-red); padding: 5px 15px; border-radius: 8px; color: var(--verb-red); }
+
+        /* Game Section */
+        .builder-section { background: #fff; border-radius: 15px; padding: 30px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(128, 0, 0, 0.08); border-top: 5px solid var(--verb-red); }
+        .word-bank { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; background: rgba(255,255,255,.5); border: 2px dashed var(--verb-red); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
+        .word-chip { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.4rem; color: var(--verb-red); background: var(--verb-light); border: 2px solid #fca5a5; border-radius: 10px; padding: 10px 20px; cursor: grab; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s; user-select: none; font-weight: bold;}
+        .word-chip:active { cursor: grabbing; }
+        .word-chip.used { opacity: 0; pointer-events: none; transform: scale(0); transition: all 0.5s; }
+        .word-chip.selected { outline: 3px solid var(--verb-red); transform: translateY(-5px) scale(1.05); }
+
+        .sentence-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 15px 25px; margin-bottom: 15px; gap: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .s-parts { display: flex; align-items: center; gap: 15px; font-family: 'Laila', sans-serif; font-size: 1.3rem; color: var(--ink); font-weight: 600; width: 100%; justify-content: center;}
+        .s-parts .sk-base { font-family: 'Tiro Devanagari Sanskrit', serif; color: var(--text-brown); font-size: 1.6rem; font-weight: bold; min-width: 80px; text-align: right;}
+        .dropzone { min-width: 120px; height: 50px; border: 2px dashed #fca5a5; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: var(--verb-red); font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.5rem; font-weight: bold;}
+        .dropzone.correct { border-color: var(--success-green); background: rgba(34, 197, 94, 0.1); border-style: solid; color: var(--success-green); }
+        .dropzone.wrong { animation: shake 0.5s; border-color: var(--error-red); background: rgba(239, 68, 68, 0.1); }
+        .s-meaning { font-size: 0.95rem; color: #666; font-weight: 600; text-align: center; width: 100%; margin-top: 5px;}
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25%, 75% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
+
+        /* Quiz Section */
+        .quiz-section { background: #fff; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(128, 0, 0, 0.08); border-top: 5px solid var(--text-maroon); margin-bottom: 40px;}
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .quiz-title { font-size: 1.5rem; color: var(--text-brown); font-weight: 700; }
+        .quiz-progress { font-weight: 600; color: var(--accent-gold); }
+        .quiz-question { font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; text-align: center; line-height: 1.6;}
+        .options-grid { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
+        .option-btn { background: var(--bg-parchment); border: 2px solid #ddd; padding: 15px 20px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-align: left; display: flex; align-items: center; gap: 15px; font-family: 'Laila', sans-serif;}
+        .option-btn:hover { border-color: var(--accent-gold); background: #fff; transform: translateY(-2px); }
+        .option-btn.correct { background: rgba(34, 197, 94, 0.1); border-color: var(--success-green); color: #065f46; }
+        .option-btn.wrong { background: rgba(239, 68, 68, 0.1); border-color: var(--error-red); color: #991b1b; }
+        .quiz-controls { text-align: center; margin-top: 25px; }
+
+        /* Nav Buttons */
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 10px; }
+        .btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s; cursor: pointer; border: none; display: flex; align-items: center; gap: 5px;}
+        .btn-outline { border: 2px solid var(--text-maroon); color: var(--text-maroon); background: transparent; }
+        .btn-outline:hover { background: rgba(128, 0, 0, 0.05); }
+        .btn-primary { background: var(--text-maroon); color: white; }
+        .btn-primary:hover { background: #600000; }
+
+        /* --- FABS & MODALS (BOTH SHABDA & DHATU) --- */
+        .fabs-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 100; display: flex; flex-direction: column; gap: 15px;}
+        .fab-btn { color: #fff; border: none; border-radius: 50px; padding: 12px 20px; font-family: 'Laila', sans-serif; font-size: 1.1rem; font-weight: 800; box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
+        .fab-btn:hover { transform: translateY(-3px) scale(1.05); }
+        .fab-dhatu { background: linear-gradient(135deg, var(--verb-red), #b91c1c); }
+        .fab-shabda { background: linear-gradient(135deg, var(--text-maroon), var(--accent-gold)); }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; padding: 20px; }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-content { background: var(--bg-parchment); width: 100%; max-width: 900px; max-height: 95vh; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow-y: auto; position: relative; }
+        
+        /* Modal Headers */
+        .modal-header { background: #fffcf5; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 2px solid rgba(0,0,0,0.1);}
+        .modal-header h2 { font-family: 'Inknut Antiqua', serif; font-size: 1.5rem; margin: 0; padding-right: 40px; }
+        .close-btn { background: transparent; border: none; font-size: 2.5rem; cursor: pointer; position: absolute; right: 20px; top: 12px; }
+        
+        .dhatu-theme { border: 3px solid var(--verb-red); }
+        .dhatu-theme .modal-header { color: var(--verb-red); }
+        .dhatu-theme .close-btn { color: var(--verb-red); }
+
+        .shabda-theme { border: 3px solid var(--accent-gold); }
+        .shabda-theme .modal-header { color: var(--text-maroon); }
+        .shabda-theme .close-btn { color: var(--text-maroon); }
+
+        /* Dhatu Nav & Table */
+        .dhatu-nav { display: flex; flex-wrap: wrap; gap: 10px; padding: 20px; justify-content: center; background: #fff; border-bottom: 1px solid #eee;}
+        .d-chip { background: #fff; border: 2px solid var(--verb-red); color: var(--verb-red); padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.2s; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.2rem;}
+        .d-chip:hover { background: var(--verb-light); transform: translateY(-2px); }
+        .d-chip.active { background: var(--verb-red); color: #fff; }
+        .d-chip span.tr-desc { font-family: 'Laila', sans-serif; font-size: 0.9rem; font-weight: normal; margin-left: 5px;}
+
+        .table-container { padding: 30px 20px; position: relative; display: flex; flex-direction: column; align-items: center;}
+        table { width: 100%; max-width: 800px; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        th, td { border: 1px solid #ddd; padding: 15px; text-align: center; }
+        
+        .dhatu-table th { background: var(--verb-red); font-family: 'Laila', sans-serif; font-size: 1.1rem; color: #fff; font-weight: bold;}
+        .dhatu-table .person-col { background: var(--verb-light); font-weight: bold; color: var(--verb-red); text-align: left; }
+        
+        .shabda-table th { background: rgba(212, 175, 55, 0.2); font-family: 'Laila', sans-serif; font-size: 1rem; color: var(--text-brown); }
+        .shabda-table .vib-name { background: rgba(128, 0, 0, 0.05); font-family: 'Laila', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text-maroon); text-align: left;}
+
+        .td-sk { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.6rem; color: var(--text-brown); font-weight: bold; display: block;}
+        .td-en { font-size: 0.9rem; color: #666; display: block; margin-top: 5px;}
+        
+        /* Blur Effect */
+        .blur-cell { position: relative; user-select: none; }
+        .blur-content { filter: blur(6px); opacity: 0.4; }
+        
+        /* Shabda Circular Nav */
+        .circle-container { position: relative; width: 100%; height: 420px; margin: 20px auto 10px; flex-shrink: 0; }
+        .center-info { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 180px; height: 180px; display:flex; flex-direction:column; justify-content:center; z-index: 10; background: rgba(253, 245, 230, 0.9); border-radius: 50%; box-shadow: 0 0 30px rgba(255,255,255,0.8); }
+        .center-placeholder { color: #888; font-size: 1rem; font-weight: 600; }
+        .word-title { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 2.2rem; color: var(--text-maroon); line-height: 1.2; display: none;}
+        .word-desc { color: #666; font-weight: 600; font-size: 0.9rem; display: none; margin-top: 5px;}
+        
+        .s-chip { position: absolute; top: 50%; left: 50%; width: 70px; height: 70px; background: white; border: 2px solid var(--accent-gold); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); --angle: calc((var(--i) * (360deg / 12)) - 90deg); --radius: clamp(130px, 30vw, 170px); transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--radius)) rotate(calc(var(--angle) * -1)); }
+        .s-chip .c-icon { font-size: 1.3rem; margin-bottom: 2px; }
+        .s-chip .c-text { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1rem; color: var(--text-maroon); font-weight: bold; }
+        .s-chip.active { background: var(--text-maroon); border-color: var(--text-maroon); transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--radius)) rotate(calc(var(--angle) * -1)) scale(1.15); z-index: 20;}
+        .s-chip.active .c-text { color: white; }
+        
+        tr.active-row td { background: rgba(34, 197, 94, 0.1); border-bottom: 2px solid var(--success-green); }
+        td.locked-col, tr.locked-row td { filter: blur(5px); opacity: 0.3; user-select: none; pointer-events: none; }
+        tr.locked-row td.vib-name { filter: none; opacity: 1; color: #888; }
+        .lock-overlay { margin: 20px auto 0; width: fit-content; background: rgba(253, 245, 230, 0.95); padding: 15px 30px; border-radius: 50px; font-family: 'Laila', sans-serif; font-weight: bold; color: var(--text-maroon); border: 2px solid var(--text-maroon); display: flex; align-items: center; justify-content: center; gap: 10px; text-align: center;}
+
+
+        @media (max-width: 768px) {
+            .magic-formula { flex-direction: column; gap: 10px;}
+            .formula-row { padding: 10px 15px; }
+            .f-part { font-size: 1.4rem; width: 60px;}
+            .f-desc { font-size: 0.95rem; }
+            .s-parts { flex-wrap: wrap; justify-content: center; }
+            .sentence-row { flex-direction: column; text-align: center; }
+            th, td { padding: 10px; }
+            .td-sk { font-size: 1.3rem; }
+            .circle-container { height: 350px; }
+            .s-chip { width: 60px; height: 60px; --radius: 120px; }
+            .word-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body class="lang-kn">
+
+<nav class="top-nav">
+    <a href="index.html" class="logo-home">
+        <span>🏠</span>
+        <span class="kn-text">ಮುಖಪುಟ</span>
+        <span class="en-text">Home</span>
+    </a>
+    <button class="lang-switch-btn" onclick="toggleLanguage()">
+        <span class="kn-text">🌐 English</span>
+        <span class="en-text">🌐 ಕನ್ನಡ</span>
+    </button>
+</nav>
+
+<div class="fabs-wrapper">
+    <button class="fab-btn fab-dhatu" id="open-dhatu-btn">
+        ⚙️ <span class="kn-text">ಧಾತು ಧಾರಾ</span><span class="en-text">Dhatu Dhara</span>
+    </button>
+    <button class="fab-btn fab-shabda" id="open-shabda-btn">
+        📚 <span class="kn-text">ಶಬ್ದ ಶೇವಧಿಃ</span><span class="en-text">Shabda Shevadhi</span>
+    </button>
+</div>
+
+<div class="modal-overlay" id="dhatu-modal">
+    <div class="modal-content dhatu-theme">
+        <div class="modal-header">
+            <h2>
+                ⚙️ <span class="kn-text">ಧಾತು ಧಾರಾ (ವರ್ತಮಾನ ಕಾಲ - लट् लकार)</span>
+                <span class="en-text">Dhatu Dhara (Present Tense - Lät Lakāra)</span>
+            </h2>
+            <button class="close-btn" id="close-dhatu-btn">&times;</button>
+        </div>
+        
+        <div class="dhatu-nav" id="dhatu-nav">
+            </div>
+
+        <div class="table-container">
+            <h3 id="current-verb-title" style="color:var(--verb-red); font-family:'Tiro Devanagari Sanskrit', serif; font-size: 2rem; margin-bottom: 20px;">पठ्</h3>
+            <table class="dhatu-table">
+                <thead>
+                    <tr>
+                        <th id="th-person"></th>
+                        <th id="th-sing"></th>
+                        <th id="th-dual"></th>
+                        <th id="th-plur"></th>
+                    </tr>
+                </thead>
+                <tbody id="dhatu-tbody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="shabda-modal">
+    <div class="modal-content shabda-theme">
+        <div class="modal-header">
+            <h2>
+                📚 <span class="kn-text">ಸಮಗ್ರ ಶಬ್ದ ರೂಪಗಳು</span>
+                <span class="en-text">Complete Word Declensions</span>
+            </h2>
+            <button class="close-btn" id="close-shabda-btn">&times;</button>
+        </div>
+        <div class="circle-container" id="circle-nav">
+            <div class="center-info" id="center-info">
+                <div class="center-placeholder" id="placeholder-text">👆<br>
+                    <span class="kn-text">ಶಬ್ದವನ್ನು ಆಯ್ಕೆಮಾಡಿ</span><span class="en-text">Select a word</span>
+                </div>
+                <div class="word-title" id="word-title"></div>
+                <div class="word-desc" id="word-desc"></div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="shabda-table">
+                <thead>
+                    <tr>
+                        <th id="th-case-s"></th>
+                        <th id="th-sing-s"></th>
+                        <th id="th-dual-s"></th>
+                        <th id="th-plur-s"></th>
+                    </tr>
+                </thead>
+                <tbody id="shabda-tbody"></tbody>
+            </table>
+            <div class="lock-overlay" id="lock-overlay">
+                🔒 <span class="kn-text">ಸಪ್ತಮೀ ವಿಭಕ್ತಿ (ಸ್ಥಳ) ಓಪನ್ ಆಗಿದೆ! (ಕೇವಲ ಏಕವಚನ)</span>
+                <span class="en-text">7th case (Location) is open! (Singular only)</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <header>
+        <div class="level-badge">Level 12</div>
+        <h1>
+            <span class="kn-text">ವರ್ತಮಾನ ಕಾಲ - ಬಹುವಚನ</span>
+            <span class="en-text">Present Tense - Plural Verbs</span>
+        </h1>
+        <p class="subtitle">
+            <span class="kn-text">ಕ್ರಿಯಾಪದಗಳ (Verbs) ಬಹುವಚನ ಪ್ರಯೋಗ.</span>
+            <span class="en-text">Plural usage of verbs (Kriyapadani).</span>
+        </p>
+    </header>
+
+    <div class="sutra-box">
+        <div class="sutra-title">✨ <span class="kn-text">ಕ್ರಿಯಾಪದಗಳ ಬಹುವಚನ ಮ್ಯಾಜಿಕ್ ಸೂತ್ರ</span> <span class="en-text">Plural Verb Magic Sutra</span> ✨</div>
+        <p style="color: #666; margin-bottom: 10px; font-size: 1.1rem; font-weight: 600;">
+            <span class="kn-text">ಏಕವಚನದ ಕ್ರಿಯಾಪದದ ಕೊನೆಯ ಅಕ್ಷರವನ್ನು ತೆಗೆದು, ಈ ಕೆಳಗಿನ ಪ್ರತ್ಯಯಗಳನ್ನು ಸೇರಿಸಿದರೆ ಬಹುವಚನ ಸಿದ್ಧ! <strong>ಇದನ್ನು ಕಂಠಪಾಠ ಮಾಡಿ!</strong></span>
+            <span class="en-text">Remove the last letter of the singular verb and add these suffixes to form the plural! <strong>Memorize this!</strong></span>
+        </p>
+        
+        <div class="magic-formula">
+            <div class="formula-row">
+                <span class="f-part">ति (ti)</span>
+                <span class="f-arrow">➔</span>
+                <span class="f-part" style="color:var(--verb-red);">अन्ति (anti)</span>
+            </div>
+            
+            <div class="formula-row">
+                <span class="f-part">सि (si)</span>
+                <span class="f-arrow">➔</span>
+                <span class="f-part" style="color:var(--verb-red);">थ (tha)</span>
+            </div>
+            
+            <div class="formula-row">
+                <span class="f-part">आमि (āmi)</span>
+                <span class="f-arrow">➔</span>
+                <span class="f-part" style="color:var(--verb-red);">आमः (āmaḥ)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="subhashita-card">
+        <h3 style="font-family: 'Inknut Antiqua', serif; color: var(--text-maroon); margin-bottom: 15px;">
+            <span class="kn-text">सुभाषितम् - १२</span>
+            <span class="en-text">Subhashitam - 12</span>
+        </h3>
+        <p class="shloka">
+            नमन्ति फलिनो वृक्षाः नमन्ति गुणिनो जनाः ।<br>
+            शुष्ककाष्ठानि मूर्खाश्च न नमन्ति कदाचन ॥
+        </p>
+        <div class="shloka-meaning">
+            <span class="kn-text"><strong>ಅರ್ಥ:</strong> ಹಣ್ಣು ಬಿಟ್ಟ ಮರಗಳು <strong>ಬಾಗುತ್ತವೆ (नमन्ति)</strong>. ಗುಣವಂತ ಜನರು <strong>ಬಾಗುತ್ತಾರೆ (नमन्ति)</strong> (ವಿನಯದಿಂದ ಇರುತ್ತಾರೆ). ಆದರೆ ಒಣಗಿದ ಕಟ್ಟಿಗೆಗಳು ಮತ್ತು ಮೂರ್ಖರು ಎಂದಿಗೂ <strong>ಬಾಗುವುದಿಲ್ಲ (न नमन्ति)</strong>.</span>
+            <span class="en-text"><strong>Meaning:</strong> Trees laden with fruits <strong>bend down (namanti)</strong>. Virtuous people <strong>bow down (namanti)</strong> (are humble). But dry wood and fools never <strong>bend (na namanti)</strong>.</span>
+            <br><br>
+            <div style="background: rgba(212, 175, 55, 0.2); padding: 10px; border-radius: 8px;">
+                <em style="color:var(--text-maroon); font-size:0.95rem;">
+                    <span class="kn-text"><strong>ಪಾಠದ ಲಿಂಕ್:</strong> 'ಬಾಗುತ್ತಾನೆ' ಎಂಬುದಕ್ಕೆ 'ನಮತಿ' (नमति). ಮರಗಳು (ಬಹುವಚನ) ಆದ್ದರಿಂದ ನಮ್ಮ ಸೂತ್ರದಂತೆ (ತಿ ➔ ಅನ್ತಿ) <strong>'ನಮನ್ತಿ' (नमन्ति)</strong> ಆಗಿದೆ!</span>
+                    <span class="en-text"><strong>Lesson Link:</strong> 'He bends' is 'namati' (नमति). Because trees are plural, according to our sutra (ti ➔ anti) it becomes <strong>'namanti' (नमन्ति)</strong>!</span>
+                </em>
+            </div>
+        </div>
+    </div>
+
+    <div class="transform-grid">
+        <div class="t-box">
+            <div class="t-header">
+                <span class="kn-text">ते / ताः / तानि (ಅವರು/ಅವು)</span>
+                <span class="en-text">te / tāḥ / tāni (They)</span>
+            </div>
+            <div class="t-flow">
+                <span class="word-sk">चल<span style="color:gray">ति</span></span>
+                <span class="animated-arrow">➔</span>
+                <span class="word-result">चलन्ति</span>
+            </div>
+        </div>
+
+        <div class="t-box">
+            <div class="t-header">
+                <span class="kn-text">यूयम् (ನೀವು)</span>
+                <span class="en-text">yūyam (You all)</span>
+            </div>
+            <div class="t-flow">
+                <span class="word-sk">वद<span style="color:gray">सि</span></span>
+                <span class="animated-arrow">➔</span>
+                <span class="word-result">वदथ</span>
+            </div>
+        </div>
+
+        <div class="t-box">
+            <div class="t-header">
+                <span class="kn-text">वयम् (ನಾವು)</span>
+                <span class="en-text">vayam (We)</span>
+            </div>
+            <div class="t-flow">
+                <span class="word-sk">क्रीडा<span style="color:gray">मि</span></span>
+                <span class="animated-arrow">➔</span>
+                <span class="word-result">क्रीडामः</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="builder-section">
+        <h2 style="color: var(--accent-gold); margin-bottom: 10px; font-family: 'Inknut Antiqua', serif; text-align:center;">
+            <span class="kn-text">ವಾಕ್ಯ ನಿರ್ಮಾಣ (Sentence Builder)</span>
+            <span class="en-text">Sentence Builder (Drag and Fill)</span>
+        </h2>
+        <p style="text-align:center; margin-bottom: 25px; color: #555;">
+            <span class="kn-text">ಕರ್ತೃ ಪದಕ್ಕೆ ಸರಿಯಾದ ಏಕವಚನ ಅಥವಾ ಬಹುವಚನ ಕ್ರಿಯಾಪದವನ್ನು ಎಳೆದು (Drag) ಬಿಡಿ.</span>
+            <span class="en-text">Drag and drop the correct singular or plural verb matching the subject.</span>
+        </p>
+
+        <div class="word-bank" id="word-bank">
+            <div class="word-chip" draggable="true" data-word="पश्यति">पश्यति</div>
+            <div class="word-chip" draggable="true" data-word="पश्यन्ति">पश्यन्ति</div>
+            <div class="word-chip" draggable="true" data-word="वदसि">वदसि</div>
+            <div class="word-chip" draggable="true" data-word="वदथ">वदथ</div>
+            <div class="word-chip" draggable="true" data-word="पठामि">पठामि</div>
+            <div class="word-chip" draggable="true" data-word="पठामः">पठामः</div>
+            <div class="word-chip" draggable="true" data-word="गच्छति">गच्छति</div>
+            <div class="word-chip" draggable="true" data-word="गच्छन्ति">गच्छन्ति</div>
+            <div class="word-chip" draggable="true" data-word="रक्षति">रक्षति</div>
+            <div class="word-chip" draggable="true" data-word="क्रीडन्ति">क्रीडन्ति</div>
+        </div>
+
+        <div class="sentence-list" id="sentence-list">
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">सः (ಅವನು)</span> <div class="dropzone" data-answer="पश्यति"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">ते (ಅವರು)</span> <div class="dropzone" data-answer="पश्यन्ति"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">त्वं (ನೀನು)</span> <div class="dropzone" data-answer="वदसि"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">यूयं (ನೀವೆಲ್ಲರು)</span> <div class="dropzone" data-answer="वदथ"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">अहं (ನಾನು)</span> <div class="dropzone" data-answer="पठामि"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">वयं (ನಾವು)</span> <div class="dropzone" data-answer="पठामः"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">सा (ಅವಳು)</span> <div class="dropzone" data-answer="गच्छति"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">ताः (ಅವರು - ಸ್ತ್ರೀ)</span> <div class="dropzone" data-answer="गच्छन्ति"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">रामः (ರಾಮನು)</span> <div class="dropzone" data-answer="रक्षति"></div> ।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts"><span class="sk-base">मित्राणि (ಗೆಳೆಯರು)</span> <div class="dropzone" data-answer="क्रीडन्ति"></div> ।</div>
+            </div>
+        </div>
+        <div id="game-status" style="text-align:center; margin-top:20px; font-weight:bold; color:var(--success-green);">
+            <span class="kn-text">0 / 10 ಪೂರ್ಣಗೊಂಡಿದೆ</span><span class="en-text">0 / 10 Completed</span>
+        </div>
+    </div>
+
+    <div class="quiz-section" id="quiz-container">
+        <div class="quiz-header">
+            <div class="quiz-title">
+                <span class="kn-text">ಜ್ಞಾನ ಪರೀಕ್ಷೆ (Quiz)</span>
+                <span class="en-text">Knowledge Test (Quiz)</span>
+            </div>
+            <div class="quiz-progress" id="quiz-progress"></div>
+        </div>
+        <div class="quiz-question" id="quiz-question">Loading...</div>
+        <div class="options-grid" id="quiz-options"></div>
+        <div class="quiz-controls">
+            <p id="quiz-feedback" style="font-weight: 700; min-height: 24px; margin-bottom: 15px;"></p>
+            <button id="next-q-btn" class="btn btn-outline" style="display: none; border-color: var(--accent-gold); color: var(--text-brown);" type="button"></button>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <a href="level11.html" class="btn btn-outline">← <span class="kn-text">ಹಿಂದಿನ ಹಂತ</span><span class="en-text">Prev Level</span></a>
+        <a href="index.html" class="btn btn-outline" style="border-color:#555; color:#555;">🏠 <span class="kn-text">ಮುಖಪುಟ</span><span class="en-text">Home</span></a>
+        <a href="level13.html" class="btn btn-primary" id="finish-btn" style="display: none;"><span class="kn-text">ಮುಂದಿನ ಹಂತ</span><span class="en-text">Next Level</span> →</a>
+    </div>
+
+</div>
+
+<script>
+    // --- LANGUAGE MANAGEMENT ---
+    function updateTableHeaders(lang) {
+        document.getElementById('th-person').innerHTML = lang === 'kn' ? 'ಪುರುಷ (Person)' : 'Person';
+        document.getElementById('th-sing').innerHTML = lang === 'kn' ? 'ಏಕವಚನ' : 'Singular';
+        document.getElementById('th-dual').innerHTML = lang === 'kn' ? 'ದ್ವಿವಚನ' : 'Dual';
+        document.getElementById('th-plur').innerHTML = lang === 'kn' ? 'ಬಹುವಚನ' : 'Plural';
+        
+        document.getElementById('th-case-s').innerHTML = lang === 'kn' ? 'ವಿಭಕ್ತಿ' : 'Case';
+        document.getElementById('th-sing-s').innerHTML = lang === 'kn' ? 'ಏಕವಚನ' : 'Singular';
+        document.getElementById('th-dual-s').innerHTML = lang === 'kn' ? 'ದ್ವಿವಚನ' : 'Dual';
+        document.getElementById('th-plur-s').innerHTML = lang === 'kn' ? 'ಬಹುವಚನ' : 'Plural';
+    }
+
+    function setLanguage(lang) {
+        document.body.classList.remove('lang-kn', 'lang-en');
+        document.body.classList.add(`lang-${lang}`);
+        localStorage.setItem('trayeeLang', lang);
+        updateTableHeaders(lang);
+    }
+    function toggleLanguage() {
+        const currentLang = localStorage.getItem('trayeeLang') || 'kn';
+        setLanguage(currentLang === 'kn' ? 'en' : 'kn');
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+        setLanguage(localStorage.getItem('trayeeLang') || 'kn');
+    });
+
+    // --- MODAL CONTROLS ---
+    const dhatuModal = document.getElementById('dhatu-modal');
+    document.getElementById('open-dhatu-btn').addEventListener('click', () => { dhatuModal.classList.add('show'); if(!document.querySelector('.d-chip.active')) renderDhatu(dhatuData[0]); });
+    document.getElementById('close-dhatu-btn').addEventListener('click', () => dhatuModal.classList.remove('show'));
+    dhatuModal.addEventListener('click', (e) => { if(e.target === dhatuModal) dhatuModal.classList.remove('show'); });
+
+    const shabdaModal = document.getElementById('shabda-modal');
+    document.getElementById('open-shabda-btn').addEventListener('click', () => shabdaModal.classList.add('show'));
+    document.getElementById('close-shabda-btn').addEventListener('click', () => shabdaModal.classList.remove('show'));
+    shabdaModal.addEventListener('click', (e) => { if(e.target === shabdaModal) shabdaModal.classList.remove('show'); });
+
+
+    // --- DHATU DHARA LOGIC ---
+    const dhatuData = [
+        { id: "पठ्", name: "पठ्", kn: "ಓದು", en: "Read", forms: [["पठति", "He/She reads", "पठतः", "पठन्ति", "They read"], ["पठसि", "You read", "पठथः", "पठथ", "You all read"], ["पठामि", "I read", "पठावः", "पठामः", "We read"]] },
+        { id: "चल्", name: "चल्", kn: "ನಡೆ", en: "Walk", forms: [["चलति", "He/She walks", "चलतः", "चलन्ति", "They walk"], ["चलसि", "You walk", "चलथः", "चलथ", "You all walk"], ["चलामि", "I walk", "चलावः", "चलामः", "We walk"]] },
+        { id: "पच्", name: "पच्", kn: "ಅಡುಗೆಮಾಡು", en: "Cook", forms: [["पचति", "He/She cooks", "पचतः", "पचन्ति", "They cook"], ["पचसि", "You cook", "पचथः", "पचथ", "You all cook"], ["पचामि", "I cook", "पचावः", "पचामः", "We cook"]] },
+        { id: "वद्", name: "वद्", kn: "ಮಾತನಾಡು", en: "Speak", forms: [["वदति", "He/She speaks", "वदतः", "वदन्ति", "They speak"], ["वदसि", "You speak", "वदथः", "वदथ", "You all speak"], ["वदामि", "I speak", "वदावः", "वदामः", "We speak"]] },
+        { id: "क्रीड्", name: "क्रीड्", kn: "ಆಟವಾಡು", en: "Play", forms: [["क्रीडति", "He/She plays", "क्रीडतः", "क्रीडन्ति", "They play"], ["क्रीडसि", "You play", "क्रीडथः", "क्रीडथ", "You all play"], ["क्रीडामि", "I play", "क्रीडावः", "क्रीडामः", "We play"]] },
+        { id: "स्मृ", name: "स्मृ", kn: "ನೆನಪಿಸಿಕೊ", en: "Remember", forms: [["स्मरति", "He/She remembers", "स्मरतः", "स्मरन्ति", "They remember"], ["स्मरसि", "You remember", "स्मरथः", "स्मरथ", "You all remember"], ["स्मरामि", "I remember", "स्मरावः", "स्मरामः", "We remember"]] },
+        { id: "रक्ष्", name: "रक्ष्", kn: "ರಕ್ಷಿಸು", en: "Protect", forms: [["रक्षति", "He/She protects", "रक्षतः", "रक्षन्ति", "They protect"], ["रक्षसि", "You protect", "रक्षथः", "रक्षथ", "You all protect"], ["रक्षामि", "I protect", "रक्षावः", "रक्षामः", "We protect"]] }
+    ];
+
+    const personNames = [ 
+        {kn: "ಪ್ರಥಮ (ಅವರು)", en: "Third (He/She/They)"}, 
+        {kn: "ಮಧ್ಯಮ (ನೀವು)", en: "Second (You)"}, 
+        {kn: "ಉತ್ತಮ (ನಾವು)", en: "First (I/We)"} 
+    ];
+
+    const navContainer = document.getElementById('dhatu-nav');
+    dhatuData.forEach((data, index) => {
+        const chip = document.createElement('button');
+        chip.className = 'd-chip';
+        chip.innerHTML = `${data.name} <span class="tr-desc kn-text">(${data.kn})</span><span class="tr-desc en-text">(${data.en})</span>`;
+        chip.onclick = () => renderDhatu(data);
+        navContainer.appendChild(chip);
+    });
+
+    function renderDhatu(data) {
+        document.querySelectorAll('.d-chip').forEach(c => {
+            if(c.textContent.includes(data.name)) c.classList.add('active');
+            else c.classList.remove('active');
+        });
+        document.getElementById('current-verb-title').innerHTML = `${data.name} <span style="font-family:'Laila', sans-serif; font-size:1.2rem; color:#666;" class="kn-text">(${data.kn})</span><span style="font-family:'Laila', sans-serif; font-size:1.2rem; color:#666;" class="en-text">(${data.en})</span>`;
+        
+        const tbody = document.getElementById('dhatu-tbody');
+        tbody.innerHTML = '';
+        data.forms.forEach((row, rowIndex) => {
+            const tr = document.createElement('tr');
+            
+            const th = document.createElement('td');
+            th.className = 'person-col';
+            th.innerHTML = `<span class="kn-text">${personNames[rowIndex].kn}</span><span class="en-text">${personNames[rowIndex].en}</span>`;
+            tr.appendChild(th);
+            
+            // Singular
+            const td1 = document.createElement('td');
+            td1.innerHTML = `<span class="td-sk">${row[0]}</span><span class="td-en">${row[1]}</span>`;
+            tr.appendChild(td1);
+
+            // Dual (Blurred - No text)
+            const td2 = document.createElement('td');
+            td2.className = 'blur-cell';
+            td2.innerHTML = `<div class="blur-content"><span class="td-sk">${row[2]}</span></div>`;
+            tr.appendChild(td2);
+
+            // Plural
+            const td3 = document.createElement('td');
+            td3.innerHTML = `<span class="td-sk">${row[3]}</span><span class="td-en">${row[4]}</span>`;
+            tr.appendChild(td3);
+
+            tbody.appendChild(tr);
+        });
+    }
+
+    // --- SHABDA SHEVADHI FULL 12 WORDS DATA ---
+    const shabdaData = [
+        { id: "राम", icon: "🏹", name: "राम", desc_kn: "ಅ-ಕಾರಾಂತಃ ಪುಂಲಿಂಗಃ", desc_en: "a-ending Masculine", declensions: [ ["रामः", "रामौ", "रामाः"], ["रामम्", "रामौ", "रामान्"], ["रामेण", "रामाभ्याम्", "रामैः"], ["रामाय", "रामाभ्याम्", "रामेभ्यः"], ["रामात्", "रामाभ्याम्", "रामेभ्यः"], ["रामस्य", "रामयोः", "रामाणाम्"], ["रामे", "रामयोः", "रामेषु"], ["हे राम", "हे रामौ", "हे रामाः"] ] },
+        { id: "सीता", icon: "🌸", name: "सीता", desc_kn: "ಆ-ಕಾರಾಂತಃ ಸ್ತ್ರೀಲಿಂಗಃ", desc_en: "ā-ending Feminine", declensions: [ ["सीता", "सीते", "सीताः"], ["सीताम्", "सीते", "सीताः"], ["सीतया", "सीताभ्याम्", "सीताभिः"], ["सीतायै", "सीताभ्याम्", "सीताभ्यः"], ["सीतायाः", "सीताभ्याम्", "सीताभ्यः"], ["सीतायाः", "सीतयोः", "सीतानाम्"], ["सीतायाम्", "सीतयोः", "सीतासु"], ["हे सीते", "हे सीते", "हे सीताः"] ] },
+        { id: "वन", icon: "🌳", name: "वन", desc_kn: "ಅ-ಕಾರಾಂತಃ ನಪುಂಸಕಲಿಂಗಃ", desc_en: "a-ending Neuter", declensions: [ ["वनम्", "वने", "वनानि"], ["वनम्", "वने", "वनानि"], ["वनेन", "वनाभ्याम्", "वनैः"], ["वनाय", "वनाभ्याम्", "वनेभ्यः"], ["वनात्", "वनाभ्याम्", "वनेभ्यः"], ["वनस्य", "वनयोः", "वनानाम्"], ["वने", "वनयोः", "वनेषु"], ["हे वन", "हे वने", "हे वनानि"] ] },
+        { id: "हरि", icon: "🌞", name: "हरि", desc_kn: "ಇ-ಕಾರಾಂತಃ ಪುಂಲಿಂಗಃ", desc_en: "i-ending Masculine", declensions: [ ["हरिः", "हरी", "हरयः"], ["हरिम्", "हरी", "हरीन्"], ["हरिणा", "हरिभ्याम्", "हरिभिः"], ["हरये", "हरिभ्याम्", "हरिभ्यः"], ["हरेः", "हरिभ्याम्", "हरिभ्यः"], ["हरेः", "हर्योः", "हरीणाम्"], ["हरौ", "हर्योः", "हरिषु"], ["हे हरे", "हे हरी", "हे हरयः"] ] },
+        { id: "नदी", icon: "🌊", name: "नदी", desc_kn: "ಈ-ಕಾರಾಂತಃ ಸ್ತ್ರೀಲಿಂಗಃ", desc_en: "ī-ending Feminine", declensions: [ ["नदी", "नद्यौ", "नद्यः"], ["नदीम्", "नद्यौ", "नदीः"], ["नद्या", "नदीभ्याम्", "नदीभिः"], ["नद्यै", "नदीभ्याम्", "नदीभ्यः"], ["नद्याः", "नदीभ्याम्", "नदीभ्यः"], ["नद्याः", "नद्योः", "नदीनाम्"], ["नद्याम्", "नद्योः", "नदीषु"], ["हे नदि", "हे नद्यौ", "हे नद्यः"] ] },
+        { id: "वारि", icon: "💧", name: "वारि", desc_kn: "ಇ-ಕಾರಾಂತಃ ನಪುಂಸಕಲಿಂಗಃ", desc_en: "i-ending Neuter", declensions: [ ["वारि", "वारिणी", "वारीणि"], ["वारि", "वारिणी", "वारीणि"], ["वारिणा", "वारिभ्याम्", "वारिभिः"], ["वारिणे", "वारिभ्याम्", "वारिभ्यः"], ["वारिणः", "वारिभ्याम्", "वारिभ्यः"], ["वारिणः", "वारिणोः", "वारीणाम्"], ["वारिणि", "वारिणोः", "वारिषु"], ["हे वारि", "हे वारिणी", "हे वारीणि"] ] },
+        { id: "गुरु", icon: "🧘‍♂️", name: "गुरु", desc_kn: "ಉ-ಕಾರಾಂತಃ ಪುಂಲಿಂಗಃ", desc_en: "u-ending Masculine", declensions: [ ["गुरुः", "गुरू", "गुरवः"], ["गुरुम्", "गुरू", "गुरून्"], ["गुरुणा", "गुरुभ्याम्", "गुरुभिः"], ["गुरवे", "गुरुभ्याम्", "गुरुभ्यः"], ["गुरोः", "गुरुभ्याम्", "गुरुभ्यः"], ["गुरोः", "गुर्वोः", "गुरूणाम्"], ["गुरौ", "गुर्वोः", "गुरुषु"], ["हे गुरो", "हे गुरू", "हे गुरवः"] ] },
+        { id: "वधू", icon: "👰", name: "वधू", desc_kn: "ಊ-ಕಾರಾಂತಃ ಸ್ತ್ರೀಲಿಂಗಃ", desc_en: "ū-ending Feminine", declensions: [ ["वधूः", "वध्वौ", "वध्वः"], ["वधूम्", "वध्वौ", "वधूः"], ["वध्वा", "वधूभ्याम्", "वधूभिः"], ["वध्वै", "वधूभ्याम्", "वधूभ्यः"], ["वध्वाः", "वधूभ्याम्", "वधूभ्यः"], ["वध्वाः", "वध्वोः", "वधूनाम्"], ["वध्वाम्", "वध्वोः", "वधूषु"], ["हे वधु", "हे वध्वौ", "हे वध्वः"] ] },
+        { id: "मधु", icon: "🍯", name: "मधु", desc_kn: "ಉ-ಕಾರಾಂತಃ ನಪುಂಸಕಲಿಂಗಃ", desc_en: "u-ending Neuter", declensions: [ ["मधु", "मधुनी", "मधूनि"], ["मधु", "मधुनी", "मधूनि"], ["मधुना", "मधुभ्याम्", "मधुभिः"], ["मधुने", "मधुभ्याम्", "मधुभ्यः"], ["मधुनः", "मधुभ्याम्", "मधुभ्यः"], ["मधुनः", "मधुनोः", "मधूनाम्"], ["मधुनि", "मधुनोः", "मधुषु"], ["हे मधु", "हे मधुनी", "हे मधूनि"] ] },
+        { id: "पितृ", icon: "👨‍👧", name: "पितृ", desc_kn: "ಋ-ಕಾರಾಂತಃ ಪುಂಲಿಂಗಃ", desc_en: "ṛ-ending Masculine", declensions: [ ["पिता", "पितरौ", "पितरः"], ["पितरम्", "पितरौ", "पितॄन्"], ["पित्रा", "पितृभ्याम्", "पितृभिः"], ["पित्रे", "पितृभ्याम्", "पितृभ्यः"], ["पितुः", "पितृभ्याम्", "पितृभ्यः"], ["पितुः", "पित्रोः", "पितॄणाम्"], ["पितरि", "पित्रोः", "पितृषु"], ["हे पितः", "हे पितरौ", "हे पितरः"] ] },
+        { id: "मातृ", icon: "👩‍👧", name: "मातृ", desc_kn: "ಋ-ಕಾರಾಂತಃ ಸ್ತ್ರೀಲಿಂಗಃ", desc_en: "ṛ-ending Feminine", declensions: [ ["माता", "मातरौ", "मातरः"], ["मातरम्", "मातरौ", "मातॄः"], ["मात्रा", "मातृभ्याम्", "मातृभिः"], ["मात्रे", "मातृभ्याम्", "मातृभ्यः"], ["मातुः", "मातृभ्याम्", "मातृभ्यः"], ["मातुः", "मात्रोः", "मातॄणाम्"], ["मातरि", "मात्रोः", "मातृषु"], ["हे मातः", "हे मातरौ", "हे मातरः"] ] },
+        { id: "गो", icon: "🐄", name: "गो", desc_kn: "ಓ-ಕಾರಾಂತಃ ಪುಂ/ಸ್ತ್ರೀಲಿಂಗಃ", desc_en: "o-ending Masc/Fem", declensions: [ ["गौः", "गावौ", "गावः"], ["गाम्", "गावौ", "गाः"], ["गवा", "गोभ्याम्", "गोभिः"], ["गवे", "गोभ्याम्", "गोभ्यः"], ["गोः", "गोभ्याम्", "गोभ्यः"], ["गोः", "गवोः", "गवाम्"], ["गवि", "गवोः", "गोषु"], ["हे गौः", "हे गावौ", "हे गावः"] ] }
+    ];
+
+    const vibhaktiNames = [ 
+        {kn: "೧. ಪ್ರಥಮಾ", en: "1. Prathama"}, {kn: "೨. ದ್ವಿತೀಯಾ", en: "2. Dvitiya"}, 
+        {kn: "೩. ತೃತೀಯಾ", en: "3. Tritiya"}, {kn: "೪. ಚತುರ್ಥೀ", en: "4. Chaturthi"}, 
+        {kn: "೫. ಪಂಚಮೀ", en: "5. Panchami"}, {kn: "६. ಷಷ್ಠೀ", en: "6. Shashthi"}, 
+        {kn: "೭. ಸಪ್ತಮೀ", en: "7. Saptami"}, {kn: "೮. ಸಂಬೋಧನಾ", en: "8. Sambodhana"} 
+    ];
+
+    const modal = document.getElementById('shabda-modal');
+    document.getElementById('open-shabda-btn').addEventListener('click', () => modal.classList.add('show'));
+    document.getElementById('close-shabda-btn').addEventListener('click', () => modal.classList.remove('show'));
+    modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('show'); });
+
+    shabdaData.forEach((data, index) => {
+        const chip = document.createElement('button');
+        chip.className = 's-chip';
+        chip.style.setProperty('--i', index);
+        chip.innerHTML = `<span class="c-icon">${data.icon}</span><span class="c-text">${data.id}</span>`;
+        chip.onclick = () => {
+            document.querySelectorAll('.s-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            document.getElementById('placeholder-text').style.display = 'none';
+            document.getElementById('word-title').style.display = 'block';
+            document.getElementById('word-desc').style.display = 'block';
+            document.querySelector('.shabda-theme .table-container table').style.display = 'table';
+            document.getElementById('word-title').textContent = data.name;
+            
+            document.getElementById('word-desc').innerHTML = `<span class="kn-text">${data.desc_kn}</span><span class="en-text">${data.desc_en}</span>`;
+            
+            const tbody = document.getElementById('shabda-tbody');
+            tbody.innerHTML = '';
+            data.declensions.forEach((row, rowIndex) => {
+                const tr = document.createElement('tr');
+                
+                if(rowIndex === 0 || rowIndex === 1 || rowIndex === 6) { tr.className = 'active-row'; } 
+                else { tr.className = 'locked-row'; }
+                
+                const th = document.createElement('td');
+                th.className = 'vib-name';
+                th.innerHTML = `<span class="kn-text">${vibhaktiNames[rowIndex].kn}</span><span class="en-text">${vibhaktiNames[rowIndex].en}</span>`;
+                tr.appendChild(th);
+                
+                row.forEach((word, colIndex) => {
+                    const td = document.createElement('td');
+                    td.textContent = word;
+                    if (rowIndex !== 6 && colIndex > 0) td.classList.add('locked-col');
+                    if (rowIndex === 6 && colIndex > 0) td.classList.add('locked-col'); // lock dual and plural in 7th
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+        };
+        document.getElementById('circle-nav').appendChild(chip);
+    });
+
+    // --- GAME DRAG & DROP ---
+    function shuffleElements(containerId, itemClass) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        const items = Array.from(container.querySelectorAll(itemClass));
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        items.forEach(item => container.appendChild(item));
+    }
+    shuffleElements('word-bank', '.word-chip');
+    shuffleElements('sentence-list', '.sentence-row');
+
+    const dropChips = document.querySelectorAll('.word-chip');
+    const dropzones = document.querySelectorAll('.dropzone');
+    let selectedChip = null;
+
+    dropChips.forEach(chip => {
+        chip.addEventListener('dragstart', (e) => { e.dataTransfer.setData('text/plain', chip.dataset.word); chip.style.opacity = '0.4'; });
+        chip.addEventListener('dragend', () => { chip.style.opacity = '1'; });
+        chip.addEventListener('click', () => {
+            if (chip.classList.contains('used')) return;
+            dropChips.forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+            selectedChip = chip;
+        });
+    });
+
+    function handleDrop(zone, word) {
+        if (zone.classList.contains('correct')) return;
+        if (word === zone.dataset.answer) {
+            zone.textContent = word;
+            zone.classList.add('correct');
+            dropChips.forEach(c => {
+                if (c.dataset.word === word) { c.classList.add('used'); c.classList.remove('selected'); c.draggable = false; }
+            });
+            selectedChip = null;
+            const correctCount = document.querySelectorAll('.dropzone.correct').length;
+            const status = document.getElementById('game-status');
+            status.innerHTML = `<span class="kn-text">${correctCount} / 10 ಪೂರ್ಣಗೊಂಡಿದೆ</span><span class="en-text">${correctCount} / 10 Completed</span>`;
+            if (correctCount === 10) {
+                status.innerHTML += '<br><span class="kn-text"> 🎉 ಅದ್ಭುತ! ನೀವು ಏಕವಚನ ಮತ್ತು ಬಹುವಚನಗಳನ್ನು ಸರಿಯಾಗಿ ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದೀರಿ.</span><span class="en-text"> 🎉 Awesome! You understood singular and plural perfectly.</span>';
+                status.style.color = 'var(--success-green)';
+            }
+        } else {
+            zone.classList.remove('wrong'); void zone.offsetWidth; zone.classList.add('wrong');
+            setTimeout(() => zone.classList.remove('wrong'), 500);
+        }
+    }
+
+    dropzones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => e.preventDefault());
+        zone.addEventListener('drop', (e) => { e.preventDefault(); handleDrop(zone, e.dataTransfer.getData('text/plain')); });
+        zone.addEventListener('click', () => { if (selectedChip) handleDrop(zone, selectedChip.dataset.word); });
+    });
+
+    // --- QUIZ LOGIC (10 Questions) ---
+    const questions = [
+        { q: "<span class='kn-text'>'पठति' (ಓದುತ್ತಾನೆ) ಪದದ ಬಹುವಚನ ರೂಪವೇನು?</span><span class='en-text'>What is the plural form of 'पठति' (Reads)?</span>", options: ["पठसि", "पठन्ति", "पठामः", "पठथ"], ans: 1 },
+        { q: "<span class='kn-text'>ಮ್ಯಾಜಿಕ್ ಸೂತ್ರದಂತೆ 'सि' (si) ಇದ್ದರೆ, ಬಹುವಚನದಲ್ಲಿ ಏನಾಗುತ್ತದೆ?</span><span class='en-text'>According to the magic sutra, if singular ends in 'सि' (si), what does it become in plural?</span>", options: ["थ (tha)", "अन्ति (anti)", "आमः (āmaḥ)", "अथ (atha)"], ans: 0 },
+        { q: "<span class='kn-text'>'वयम्' (ನಾವು) ಜೊತೆಗೆ ಬರುವ ಸರಿಯಾದ ಕ್ರಿಯಾಪದ ಯಾವುದು?</span><span class='en-text'>Which is the correct verb form to use with 'वयम्' (We)?</span>", options: ["चलामि", "चलन्ति", "चलामः", "चलथ"], ans: 2 },
+        { q: "<span class='kn-text'>'यूयम्' (ನೀವೆಲ್ಲರೂ) 'वद' (ಮಾತನಾಡು) - ಸರಿಯಾದ ವಾಕ್ಯ ರಚಿಸಿ.</span><span class='en-text'>'यूयम्' (You all) + 'वद' (Speak) - Make the correct sentence.</span>", options: ["यूयं वदन्ति", "यूयं वदामः", "यूयं वदथ", "यूयं वदसि"], ans: 2 },
+        { q: "<span class='kn-text'>ಸುಭಾಷಿತದ 'नमन्ति' ಪದವು ಯಾವ ಪುರುಷ ಮತ್ತು ವಚನದಲ್ಲಿದೆ?</span><span class='en-text'>What is the Person and Number of 'नमन्ति' from the Subhashita?</span>", options: ["ಪ್ರಥಮ ಪುರುಷ, ಏಕವಚನ", "ಪ್ರಥಮ ಪುರುಷ, ಬಹುವಚನ", "ಉತ್ತಮ ಪುರುಷ, ಬಹುವಚನ", "ಮಧ್ಯಮ ಪುರುಷ, ಏಕವಚನ"], ans: 1 },
+        { q: "<span class='kn-text'>'ಅವಳು ಹೋಗುತ್ತಾಳೆ' ಎಂಬುದಕ್ಕೆ ಸರಿಯಾದ ಸಂಸ್ಕೃತ ವಾಕ್ಯ ಯಾವುದು?</span><span class='en-text'>What is the correct Sanskrit sentence for 'She goes'?</span>", options: ["सा गच्छन्ति", "ते गच्छन्ति", "सा गच्छति", "सा गच्छसि"], ans: 2 },
+        { q: "<span class='kn-text'>'अहं पठामि' ಎಂಬ ವಾಕ್ಯದ ಬಹುವಚನ ರೂಪವೇನು?</span><span class='en-text'>What is the plural form of the sentence 'अहं पठामि'?</span>", options: ["वयं पठन्ति", "वयं पठामः", "ते पठन्ति", "यूयं पठथ"], ans: 1 },
+        { q: "<span class='kn-text'>'ताः' (ಅವರು - ಸ್ತ್ರೀ) ಪದದೊಂದಿಗೆ ಯಾವ ಕ್ರಿಯಾಪದ ಬರುತ್ತದೆ?</span><span class='en-text'>Which verb form is used with 'ताः' (They - feminine)?</span>", options: ["रक्षति", "रक्षन्ति", "रक्षसि", "रक्षामः"], ans: 1 },
+        { q: "<span class='kn-text'>'ತ್ವಂ' (ನೀನು) ಜೊತೆಗೆ ಬರುವ 'ಖಾದ್' (ತಿನ್ನು) ಧಾತುವಿನ ರೂಪವೇನು?</span><span class='en-text'>What is the form of root 'khad' (eat) with 'tvaṃ' (you)?</span>", options: ["खादति", "खादन्ति", "खादामि", "खादसि"], ans: 3 },
+        { q: "<span class='kn-text'>ಮ್ಯಾಜಿಕ್ ಸೂತ್ರದ ಪ್ರಕಾರ: 'ಆಮಿ' ➔ 'ಆಮಃ'. ಹಾಗಾದರೆ 'गच्छामि' ಏನಾಗುತ್ತದೆ?</span><span class='en-text'>Magic sutra: 'āmi' ➔ 'āmaḥ'. So what does 'gacchāmi' become?</span>", options: ["गच्छति", "गच्छथ", "गच्छामः", "गच्छन्ति"], ans: 2 }
+    ];
+    
+    function shuffleQArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+    shuffleQArray(questions);
+
+    let currentQIndex = 0; let score = 0;
+    const questionEl = document.getElementById('quiz-question');
+    const optionsEl = document.getElementById('quiz-options');
+    const progressEl = document.getElementById('quiz-progress');
+    const feedbackEl = document.getElementById('quiz-feedback');
+    const nextQBtn = document.getElementById('next-q-btn');
+    const finishBtn = document.getElementById('finish-btn');
+
+    function loadQuestion() {
+        feedbackEl.innerHTML = ''; nextQBtn.style.display = 'none';
+        const currentQ = questions[currentQIndex];
+        progressEl.innerHTML = `<span class="kn-text">ಪ್ರಶ್ನೆ ${currentQIndex + 1} / 10</span><span class="en-text">Question ${currentQIndex + 1} / 10</span>`;
+        questionEl.innerHTML = currentQ.q;
+        optionsEl.innerHTML = '';
+        currentQ.options.forEach((opt, index) => {
+            const btn = document.createElement('button'); btn.className = 'option-btn';
+            const isSanskrit = /[\u0900-\u097F]/.test(opt) && opt.length < 25;
+            if (isSanskrit) { btn.innerHTML = `<span style="font-family:'Tiro Devanagari Sanskrit', serif; font-size:1.4rem;">${opt}</span>`; } 
+            else { btn.innerHTML = `<span>${opt}</span>`; }
+            
+            btn.onclick = () => {
+                const allBtns = optionsEl.querySelectorAll('.option-btn');
+                allBtns.forEach(b => b.disabled = true);
+                if (index === currentQ.ans) {
+                    btn.classList.add('correct'); score++;
+                    feedbackEl.innerHTML = '<span class="kn-text">✅ ಉತ್ತಮಮ್!</span><span class="en-text">✅ Correct!</span>';
+                    feedbackEl.style.color = 'var(--success-green)';
+                } else {
+                    btn.classList.add('wrong'); allBtns[currentQ.ans].classList.add('correct');
+                    feedbackEl.innerHTML = '<span class="kn-text">❌ ತಪ್ಪು! ಹಸಿರು ಬಣ್ಣ ಸರಿಯಾದ ಉತ್ತರ.</span><span class="en-text">❌ Wrong! Green is correct.</span>';
+                    feedbackEl.style.color = 'var(--error-red)';
+                }
+                if (currentQIndex < questions.length - 1) {
+                    nextQBtn.style.display = 'inline-block';
+                    nextQBtn.innerHTML = '<span class="kn-text">ಮುಂದಿನ ಪ್ರಶ್ನೆ →</span><span class="en-text">Next Question →</span>';
+                } else {
+                    nextQBtn.style.display = 'none'; questionEl.innerHTML = `<span class="kn-text">ರಸಪ್ರಶ್ನೆ ಪೂರ್ಣಗೊಂಡಿದೆ!</span><span class="en-text">Quiz Completed!</span>`;
+                    optionsEl.innerHTML = `<div style="text-align:center; font-size:1.5rem; margin-bottom:20px;"><span class="kn-text">ನಿಮ್ಮ ಅಂಕಗಳು:</span><span class="en-text">Your Score:</span> <strong>${score} / 10</strong></div>`;
+                    if(score >= 8) { finishBtn.style.display = 'inline-block'; }
+                }
+            };
+            optionsEl.appendChild(btn);
+        });
+    }
+
+    nextQBtn.addEventListener('click', () => { currentQIndex++; loadQuestion(); });
+    window.onload = loadQuestion;
+</script>
+
+</body>
+</html>

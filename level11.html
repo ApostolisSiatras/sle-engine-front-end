@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samskrita Level 11 - Saptami Vibhakti Exam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;600;800&family=Laila:wght@400;600;700&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-parchment: #fdf5e6;
+            --text-brown: #4a2511;
+            --text-maroon: #800000;
+            --accent-gold: #d4af37;
+            --card-bg: #ffffff;
+            --success-green: #22c55e;
+            --error-red: #ef4444;
+            --masc-blue: #1e3a8a;
+            --saptami-orange: #d97706; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body.lang-en .kn-text { display: none !important; }
+        body.lang-kn .en-text { display: none !important; }
+
+        body {
+            font-family: 'Laila', sans-serif;
+            background-color: var(--bg-parchment);
+            color: var(--text-brown);
+            line-height: 1.6;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px 20px 80px; }
+
+        /* Top Nav */
+        .top-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 25px; background: rgba(255, 255, 255, 0.4);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3); margin-bottom: 20px;
+        }
+
+        .logo-home { 
+            font-family: 'Laila', sans-serif; font-size: 1.1rem; color: var(--text-brown); 
+            font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 5px;
+            transition: transform 0.2s;
+        }
+        .logo-home:hover { transform: translateY(-2px); color: var(--text-maroon); }
+        
+        .lang-switch-btn {
+            background: #fff; border: 2px solid var(--accent-gold); color: var(--text-maroon);
+            padding: 6px 15px; border-radius: 20px; font-family: 'Laila', sans-serif; font-weight: 700;
+            cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s;
+        }
+        .lang-switch-btn:hover { background: rgba(212, 175, 55, 0.1); transform: translateY(-2px); }
+
+        header { text-align: center; margin-bottom: 30px; }
+        .level-badge { display: inline-block; background-color: var(--text-maroon); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 1px;}
+        h1 { font-family: 'Inknut Antiqua', serif; color: var(--text-maroon); font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; color: #555; font-weight: 600; }
+
+        .motto-box {
+            text-align: center; background: rgba(128, 0, 0, 0.05);
+            border-bottom: 2px solid var(--accent-gold); padding: 25px;
+            margin-bottom: 40px; border-radius: 0 0 20px 20px;
+        }
+        .motto-sk { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.8rem; color: var(--text-maroon); font-weight: 600; display: block; margin-bottom: 5px; }
+        .motto-kn { font-size: 1.05rem; color: #555; font-style: italic; }
+
+        /* Shared Exam Section Styles */
+        .exam-section { background: #fff; border-radius: 15px; padding: 35px 30px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(128, 0, 0, 0.08); border-top: 6px solid var(--accent-gold); }
+        .section-title { font-family: 'Inknut Antiqua', serif; color: var(--text-maroon); font-size: 1.6rem; margin-bottom: 10px; text-align: center; border-bottom: 1px dashed #ccc; padding-bottom: 15px;}
+        .section-inst { text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; }
+        .status-msg { text-align: center; margin-top: 20px; font-weight: bold; color: var(--success-green); font-size: 1.2rem; min-height: 30px;}
+
+        /* 1. Drag & Drop */
+        .word-bank { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; background: rgba(255,255,255,.5); border: 2px dashed var(--accent-gold); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
+        .word-chip { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.5rem; color: var(--text-maroon); background: var(--bg-parchment); border: 2px solid #e3d4ae; border-radius: 10px; padding: 10px 25px; cursor: grab; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s; user-select: none; font-weight: bold;}
+        .word-chip:active { cursor: grabbing; }
+        .word-chip.used { opacity: 0; pointer-events: none; transform: scale(0); transition: all 0.5s; }
+        .word-chip.selected { outline: 3px solid var(--text-maroon); transform: translateY(-5px) scale(1.05); }
+
+        .sentence-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 15px 25px; margin-bottom: 15px; gap: 15px; }
+        .s-parts { display: flex; align-items: center; gap: 15px; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.6rem; color: var(--text-brown); font-weight: bold; width: 100%; justify-content: center;}
+        .dropzone { min-width: 140px; height: 50px; border: 2px dashed var(--saptami-orange); border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: var(--saptami-orange); font-size: 1.5rem;}
+        .dropzone.correct { border-color: var(--success-green); background: rgba(34, 197, 94, 0.1); border-style: solid; color: var(--success-green); }
+        .dropzone.wrong { animation: shake 0.5s; border-color: var(--error-red); background: rgba(239, 68, 68, 0.1); }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25%, 75% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
+
+        /* 2. Puzzle Section */
+        .puzzle-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 20px;}
+        .p-word { 
+            font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.5rem; padding: 15px 25px; 
+            background: #fffcf5; border: 2px solid #ddd; border-radius: 12px; cursor: pointer; 
+            transition: all 0.3s; font-weight: bold; color: var(--text-brown);
+        }
+        .p-word:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
+        .p-word.selected { background: var(--masc-blue); color: #fff; border-color: var(--masc-blue); }
+        .p-word.correct-reveal { background: var(--success-green); color: #fff; border-color: var(--success-green); }
+        .p-word.wrong-reveal { background: var(--error-red); color: #fff; border-color: var(--error-red); }
+        .check-btn { background: var(--accent-gold); color: #fff; border: none; padding: 12px 30px; font-size: 1.2rem; font-family: 'Laila', sans-serif; font-weight: bold; border-radius: 30px; cursor: pointer; display: block; margin: 0 auto; transition: all 0.3s;}
+        .check-btn:hover { background: #b48512; }
+
+        /* 3. Match the Following */
+        .match-container { display: flex; justify-content: space-around; gap: 20px; max-width: 600px; margin: 0 auto; position: relative;}
+        .match-col { display: flex; flex-direction: column; gap: 15px; flex: 1; }
+        .m-item { 
+            background: #fff; border: 2px solid #e3d4ae; padding: 15px; border-radius: 10px; 
+            font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.4rem; text-align: center; 
+            cursor: pointer; transition: all 0.2s; font-weight: bold; color: var(--text-brown);
+        }
+        .m-item:hover { background: #fffcf5; }
+        .m-item.active { border-color: var(--saptami-orange); background: rgba(217, 119, 6, 0.1); transform: scale(1.05); z-index: 2;}
+        .m-item.matched { border-color: var(--success-green); background: rgba(34, 197, 94, 0.1); color: var(--success-green); cursor: default; pointer-events: none; opacity: 0.8;}
+        .m-item.wrong { animation: shake 0.5s; border-color: var(--error-red); background: rgba(239, 68, 68, 0.1); }
+
+        /* 4. Odd One Out */
+        .odd-grid { display: flex; flex-direction: column; gap: 25px; }
+        .odd-row { background: #fdfdfd; border: 1px solid #eee; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);}
+        .odd-q-title { font-size: 1.1rem; color: #666; margin-bottom: 15px; font-weight: 600; text-align: center;}
+        .odd-options { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .o-btn { 
+            font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.4rem; padding: 12px 25px; 
+            background: #fff; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.3s;
+            color: var(--text-brown); font-weight: bold; min-width: 120px;
+        }
+        .o-btn:hover { border-color: var(--text-maroon); }
+        .o-btn.correct { background: var(--success-green); color: #fff; border-color: var(--success-green); }
+        .o-btn.wrong { background: var(--error-red); color: #fff; border-color: var(--error-red); }
+
+        /* Nav Buttons */
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 40px; flex-wrap: wrap; gap: 10px; }
+        .btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s; cursor: pointer; border: none; display: flex; align-items: center; gap: 5px;}
+        .btn-outline { border: 2px solid var(--text-maroon); color: var(--text-maroon); background: transparent; }
+        .btn-outline:hover { background: rgba(128, 0, 0, 0.05); }
+        .btn-primary { background: var(--text-maroon); color: white; }
+        .btn-primary:hover { background: #600000; }
+
+        @media (max-width: 768px) {
+            .match-container { flex-direction: row; gap: 10px; }
+            .m-item { font-size: 1.2rem; padding: 12px; }
+            .s-parts { flex-wrap: wrap; justify-content: center; font-size: 1.3rem;}
+            .dropzone { min-width: 100px; height: 40px; font-size: 1.3rem;}
+            .word-chip { font-size: 1.3rem; padding: 8px 15px; }
+            .o-btn { font-size: 1.2rem; padding: 10px 15px; min-width: 100px;}
+        }
+    </style>
+</head>
+<body class="lang-kn">
+
+<nav class="top-nav">
+    <a href="index.html" class="logo-home">
+        <span>🏠</span>
+        <span class="kn-text">ಮುಖಪುಟ</span>
+        <span class="en-text">Home</span>
+    </a>
+    <button class="lang-switch-btn" onclick="toggleLanguage()">
+        <span class="kn-text">🌐 English</span>
+        <span class="en-text">🌐 ಕನ್ನಡ</span>
+    </button>
+</nav>
+
+<div class="container">
+    <header>
+        <div class="level-badge">Level 11</div>
+        <h1>
+            <span class="kn-text">ಸಪ್ತಮೀ ವಿಭಕ್ತಿ ಪರೀಕ್ಷೆ</span>
+            <span class="en-text">Saptami Vibhakti Exam</span>
+        </h1>
+        <p class="subtitle">
+            <span class="kn-text">ಮಹಾ ಪರೀಕ್ಷೆ! ನಿಮ್ಮ ಜ್ಞಾನವನ್ನು ಒರೆಗೆ ಹಚ್ಚುವ ಸಮಯ. (ಕೇವಲ ಏಕವಚನ)</span>
+            <span class="en-text">The Mega Exam! Time to test your knowledge. (Only Singular)</span>
+        </p>
+    </header>
+
+    <div class="motto-box">
+        <span class="motto-sk">परीक्षया ज्ञानं वर्धते ।</span>
+        <span class="motto-kn">
+            <span class="kn-text">"ಪರೀಕ್ಷೆಯಿಂದ ಜ್ಞಾನವು ಬೆಳೆಯುತ್ತದೆ ಮತ್ತು ಸ್ಥಿರವಾಗುತ್ತದೆ."</span>
+            <span class="en-text">"Knowledge grows and stabilizes through testing."</span>
+        </span>
+    </div>
+
+    <div class="exam-section">
+        <h2 class="section-title">
+            <span class="kn-text">ಭಾಗ ೧: ಬಿಟ್ಟ ಸ್ಥಳ ತುಂಬಿರಿ</span>
+            <span class="en-text">Part 1: Drag and Drop</span>
+        </h2>
+        <p class="section-inst">
+            <span class="kn-text">ಸರಿಯಾದ ಸಪ್ತಮೀ ವಿಭಕ್ತಿಯ <strong>ಏಕವಚನ</strong> ಪದವನ್ನು ಎಳೆದು (Drag) ವಾಕ್ಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.</span>
+            <span class="en-text">Drag and drop the correct 7th case <strong>singular</strong> word to complete the sentence.</span>
+        </p>
+
+        <div class="word-bank" id="word-bank-1">
+            <div class="word-chip" draggable="true" data-word="वृक्षे">वृक्षे</div>
+            <div class="word-chip" draggable="true" data-word="जले">जले</div>
+            <div class="word-chip" draggable="true" data-word="शालायाम्">शालायाम्</div>
+            <div class="word-chip" draggable="true" data-word="आकाशे">आकाशे</div>
+        </div>
+
+        <div class="sentence-list" id="sentence-list-1">
+            <div class="sentence-row">
+                <div class="s-parts">वानरः <div class="dropzone" data-answer="वृक्षे"></div> कूर्दति।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts">मत्स्यः <div class="dropzone" data-answer="जले"></div> तरति।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts">छात्रः <div class="dropzone" data-answer="शालायाम्"></div> पठति।</div>
+            </div>
+            <div class="sentence-row">
+                <div class="s-parts">सूर्यः <div class="dropzone" data-answer="आकाशे"></div> प्रकाशते।</div>
+            </div>
+        </div>
+        <div class="status-msg" id="status-1"></div>
+    </div>
+
+    <div class="exam-section">
+        <h2 class="section-title">
+            <span class="kn-text">ಭಾಗ ೨: ಶಬ್ದ ಶೋಧನಮ್ (Puzzle)</span>
+            <span class="en-text">Part 2: Word Finder</span>
+        </h2>
+        <p class="section-inst">
+            <span class="kn-text">ಕೆಳಗಿನ ಗುಂಪಿನಲ್ಲಿ ಕೇವಲ <strong>ಸಪ್ತಮೀ ವಿಭಕ್ತಿಯ ಏಕವಚನ</strong> ಪದಗಳನ್ನು ಮಾತ್ರ ಕ್ಲಿಕ್ ಮಾಡಿ ಆರಿಸಿ!</span>
+            <span class="en-text">From the group below, click and select ONLY the <strong>7th Case singular</strong> words!</span>
+        </p>
+
+        <div class="puzzle-grid" id="puzzle-grid">
+            <div class="p-word" data-is-saptami="true">वने</div>
+            <div class="p-word" data-is-saptami="false">रामः</div>
+            <div class="p-word" data-is-saptami="true">शालायाम्</div>
+            <div class="p-word" data-is-saptami="false">सीता</div>
+            <div class="p-word" data-is-saptami="true">नद्याम्</div>
+            <div class="p-word" data-is-saptami="true">गुरौ</div>
+            <div class="p-word" data-is-saptami="false">फलम्</div>
+            <div class="p-word" data-is-saptami="true">वृक्षे</div>
+            <div class="p-word" data-is-saptami="true">पितरि</div>
+            <div class="p-word" data-is-saptami="false">नदी</div>
+        </div>
+        
+        <button class="check-btn" onclick="checkPuzzle()">
+            <span class="kn-text">ಉತ್ತರ ಪರೀಕ್ಷಿಸಿ</span>
+            <span class="en-text">Check Answers</span>
+        </button>
+        <div class="status-msg" id="status-2"></div>
+    </div>
+
+    <div class="exam-section">
+        <h2 class="section-title">
+            <span class="kn-text">ಭಾಗ ೩: ಹೊಂದಿಸಿ ಬರೆಯಿರಿ</span>
+            <span class="en-text">Part 3: Match the Following</span>
+        </h2>
+        <p class="section-inst">
+            <span class="kn-text">ಎಡಗಡೆಯ ಸ್ಥಳವನ್ನು (Location) ಕ್ಲಿಕ್ ಮಾಡಿ, ಅದಕ್ಕೆ ಹೊಂದುವ ಬಲಗಡೆಯ ಪದವನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ.</span>
+            <span class="en-text">Click a location on the left, then click its matching word on the right.</span>
+        </p>
+
+        <div class="match-container">
+            <div class="match-col" id="match-left">
+                <div class="m-item left-item" data-id="1">वृक्षे (ಮರದಲ್ಲಿ)</div>
+                <div class="m-item left-item" data-id="2">आकाशे (ಆಕಾಶದಲ್ಲಿ)</div>
+                <div class="m-item left-item" data-id="3">नद्याम् (ನದಿಯಲ್ಲಿ)</div>
+                <div class="m-item left-item" data-id="4">विद्यालये (ಶಾಲೆಯಲ್ಲಿ)</div>
+            </div>
+            <div class="match-col" id="match-right">
+                <div class="m-item right-item" data-match="2">चन्द्रः</div>
+                <div class="m-item right-item" data-match="4">छात्रः</div>
+                <div class="m-item right-item" data-match="1">वानरः</div>
+                <div class="m-item right-item" data-match="3">मत्स्यः</div>
+            </div>
+        </div>
+        <div class="status-msg" id="status-3"></div>
+    </div>
+
+    <div class="exam-section">
+        <h2 class="section-title">
+            <span class="kn-text">ಭಾಗ ೪: ವಿಜಾತೀಯ ಪದ ಗುರುತಿಸಿ</span>
+            <span class="en-text">Part 4: Odd One Out</span>
+        </h2>
+        <p class="section-inst">
+            <span class="kn-text">ಪ್ರತಿ ಸಾಲಿನಲ್ಲಿರುವ ಪದಗಳಲ್ಲಿ ವಿಭಕ್ತಿಗೆ ಸಂಬಂಧಪಡದ <strong>ಗುಂಪಿಗೆ ಸೇರದ ಏಕವಚನ ಪದವನ್ನು</strong> ಕ್ಲಿಕ್ ಮಾಡಿ.</span>
+            <span class="en-text">In each row, click the singular word that <strong>does not belong</strong> to the same case.</span>
+        </p>
+
+        <div class="odd-grid">
+            <div class="odd-row" id="odd-row-1">
+                <div class="odd-q-title">
+                    <span class="kn-text">೧. ಇವುಗಳಲ್ಲಿ ಸಪ್ತಮೀ ವಿಭಕ್ತಿ ಅಲ್ಲದ ಪದ ಯಾವುದು?</span>
+                    <span class="en-text">1. Which is NOT a Saptami word here?</span>
+                </div>
+                <div class="odd-options">
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-1')">रामे</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-1')">वने</button>
+                    <button class="o-btn" onclick="checkOdd(this, true, 'odd-row-1')">रामः</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-1')">देवे</button>
+                </div>
+            </div>
+
+            <div class="odd-row" id="odd-row-2">
+                <div class="odd-q-title">
+                    <span class="kn-text">೨. ಇವುಗಳಲ್ಲಿ ಸಪ್ತಮೀ ವಿಭಕ್ತಿ ಅಲ್ಲದ ಪದ ಯಾವುದು?</span>
+                    <span class="en-text">2. Which is NOT a Saptami word here?</span>
+                </div>
+                <div class="odd-options">
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-2')">शालायाम्</button>
+                    <button class="o-btn" onclick="checkOdd(this, true, 'odd-row-2')">माला</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-2')">सीतायाम्</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-2')">रमायाम्</button>
+                </div>
+            </div>
+
+            <div class="odd-row" id="odd-row-3">
+                <div class="odd-q-title">
+                    <span class="kn-text">೩. ಇವುಗಳಲ್ಲಿ ಸಪ್ತಮೀ ವಿಭಕ್ತಿ ಅಲ್ಲದ ಪದ ಯಾವುದು?</span>
+                    <span class="en-text">3. Which is NOT a Saptami word here?</span>
+                </div>
+                <div class="odd-options">
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-3')">हस्ते</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-3')">पादे</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-3')">नेत्रे</button>
+                    <button class="o-btn" onclick="checkOdd(this, true, 'odd-row-3')">मुखम्</button>
+                </div>
+            </div>
+
+            <div class="odd-row" id="odd-row-4">
+                <div class="odd-q-title">
+                    <span class="kn-text">೪. ಇವುಗಳಲ್ಲಿ ಸಪ್ತಮೀ ವಿಭಕ್ತಿ ಅಲ್ಲದ ಪದ ಯಾವುದು?</span>
+                    <span class="en-text">4. Which is NOT a Saptami word here?</span>
+                </div>
+                <div class="odd-options">
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-4')">गुरौ</button>
+                    <button class="o-btn" onclick="checkOdd(this, true, 'odd-row-4')">गुरुः</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-4')">हरौ</button>
+                    <button class="o-btn" onclick="checkOdd(this, false, 'odd-row-4')">भानौ</button>
+                </div>
+            </div>
+        </div>
+        <div class="status-msg" id="status-4"></div>
+    </div>
+
+    <div class="nav-buttons">
+        <a href="level10.html" class="btn btn-outline">← <span class="kn-text">ಹಿಂದಿನ ಹಂತ</span><span class="en-text">Prev Level</span></a>
+        <a href="index.html" class="btn btn-outline" style="border-color:#555; color:#555;">🏠 <span class="kn-text">ಮುಖಪುಟ</span><span class="en-text">Home</span></a>
+        <a href="level12.html" class="btn btn-primary" id="finish-btn" style="display: none;"><span class="kn-text">ಮುಂದಿನ ಹಂತ</span><span class="en-text">Next Level</span> →</a>
+    </div>
+
+</div>
+
+<script>
+    // --- LANGUAGE MANAGEMENT ---
+    function setLanguage(lang) {
+        document.body.classList.remove('lang-kn', 'lang-en');
+        document.body.classList.add(`lang-${lang}`);
+        localStorage.setItem('trayeeLang', lang);
+    }
+    function toggleLanguage() {
+        const currentLang = localStorage.getItem('trayeeLang') || 'kn';
+        setLanguage(currentLang === 'kn' ? 'en' : 'kn');
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+        setLanguage(localStorage.getItem('trayeeLang') || 'kn');
+    });
+
+    // Helper to check overall completion
+    let completedSections = { s1: false, s2: false, s3: false, s4: false };
+    function checkAllCompleted() {
+        if(completedSections.s1 && completedSections.s2 && completedSections.s3 && completedSections.s4) {
+            document.getElementById('finish-btn').style.display = 'inline-block';
+        }
+    }
+
+    // --- SECTION 1: DRAG & DROP ---
+    function shuffleElements(containerId, itemClass) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        const items = Array.from(container.querySelectorAll(itemClass));
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        items.forEach(item => container.appendChild(item));
+    }
+    shuffleElements('word-bank-1', '.word-chip');
+    shuffleElements('sentence-list-1', '.sentence-row');
+
+    const dropChips = document.querySelectorAll('#word-bank-1 .word-chip');
+    const dropzones = document.querySelectorAll('.dropzone');
+    let selectedChip = null;
+
+    dropChips.forEach(chip => {
+        chip.addEventListener('dragstart', (e) => { e.dataTransfer.setData('text/plain', chip.dataset.word); chip.style.opacity = '0.4'; });
+        chip.addEventListener('dragend', () => { chip.style.opacity = '1'; });
+        chip.addEventListener('click', () => {
+            if (chip.classList.contains('used')) return;
+            dropChips.forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+            selectedChip = chip;
+        });
+    });
+
+    function handleDrop(zone, word) {
+        if (zone.classList.contains('correct')) return;
+        if (word === zone.dataset.answer) {
+            zone.textContent = word;
+            zone.classList.add('correct');
+            dropChips.forEach(c => {
+                if (c.dataset.word === word) { c.classList.add('used'); c.classList.remove('selected'); c.draggable = false; }
+            });
+            selectedChip = null;
+            const correctCount = document.querySelectorAll('.dropzone.correct').length;
+            if (correctCount === 4) {
+                document.getElementById('status-1').innerHTML = '<span class="kn-text">🎉 ವಿಭಾಗ ೧ ಪೂರ್ಣಗೊಂಡಿದೆ!</span><span class="en-text">🎉 Part 1 Completed!</span>';
+                completedSections.s1 = true; checkAllCompleted();
+            }
+        } else {
+            zone.classList.remove('wrong'); void zone.offsetWidth; zone.classList.add('wrong');
+            setTimeout(() => zone.classList.remove('wrong'), 500);
+        }
+    }
+
+    dropzones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => e.preventDefault());
+        zone.addEventListener('drop', (e) => { e.preventDefault(); handleDrop(zone, e.dataTransfer.getData('text/plain')); });
+        zone.addEventListener('click', () => { if (selectedChip) handleDrop(zone, selectedChip.dataset.word); });
+    });
+
+
+    // --- SECTION 2: PUZZLE ---
+    const puzzleWords = document.querySelectorAll('.p-word');
+    puzzleWords.forEach(w => {
+        w.addEventListener('click', () => {
+            if(!w.classList.contains('correct-reveal') && !w.classList.contains('wrong-reveal')){
+                w.classList.toggle('selected');
+            }
+        });
+    });
+
+    function checkPuzzle() {
+        let allCorrect = true;
+        let missedSome = false;
+        puzzleWords.forEach(w => {
+            const isSaptami = w.dataset.isSaptami === 'true';
+            const isSelected = w.classList.contains('selected');
+            
+            if(isSelected && isSaptami) {
+                w.classList.remove('selected'); w.classList.add('correct-reveal');
+            } else if (isSelected && !isSaptami) {
+                w.classList.remove('selected'); w.classList.add('wrong-reveal');
+                allCorrect = false;
+                setTimeout(() => w.classList.remove('wrong-reveal'), 800); // revert wrong selection
+            } else if (!isSelected && isSaptami) {
+                missedSome = true;
+            }
+        });
+
+        const status2 = document.getElementById('status-2');
+        if(!allCorrect) {
+            status2.innerHTML = '<span class="kn-text" style="color:var(--error-red)">ಕೆಲವು ತಪ್ಪುಗಳಿವೆ, ಸರಿಪಡಿಸಿ!</span><span class="en-text" style="color:var(--error-red)">Some mistakes, try again!</span>';
+        } else if (missedSome) {
+            status2.innerHTML = '<span class="kn-text" style="color:var(--saptami-orange)">ಇನ್ನೂ ಕೆಲವು ಸಪ್ತಮೀ ಪದಗಳಿವೆ, ಹುಡುಕಿ!</span><span class="en-text" style="color:var(--saptami-orange)">There are still more Saptami words, find them!</span>';
+        } else {
+            status2.innerHTML = '<span class="kn-text">🎉 ವಿಭಾಗ ೨ ಪೂರ್ಣಗೊಂಡಿದೆ!</span><span class="en-text">🎉 Part 2 Completed!</span>';
+            completedSections.s2 = true; checkAllCompleted();
+        }
+    }
+
+
+    // --- SECTION 3: MATCH THE FOLLOWING ---
+    shuffleElements('match-left', '.left-item');
+    shuffleElements('match-right', '.right-item');
+
+    let activeLeft = null;
+    const leftItems = document.querySelectorAll('.left-item');
+    const rightItems = document.querySelectorAll('.right-item');
+    let matchedCount = 0;
+
+    leftItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if(item.classList.contains('matched')) return;
+            leftItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            activeLeft = item;
+        });
+    });
+
+    rightItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if(item.classList.contains('matched') || !activeLeft) return;
+            
+            if(activeLeft.dataset.id === item.dataset.match) {
+                // Match Correct
+                activeLeft.classList.remove('active');
+                activeLeft.classList.add('matched');
+                item.classList.add('matched');
+                activeLeft = null;
+                matchedCount++;
+                if(matchedCount === 4) {
+                    document.getElementById('status-3').innerHTML = '<span class="kn-text">🎉 ವಿಭಾಗ ೩ ಪೂರ್ಣಗೊಂಡಿದೆ!</span><span class="en-text">🎉 Part 3 Completed!</span>';
+                    completedSections.s3 = true; checkAllCompleted();
+                }
+            } else {
+                // Match Wrong
+                item.classList.add('wrong');
+                setTimeout(() => item.classList.remove('wrong'), 500);
+            }
+        });
+    });
+
+
+    // --- SECTION 4: ODD ONE OUT ---
+    let oddScores = { 'odd-row-1': false, 'odd-row-2': false, 'odd-row-3': false, 'odd-row-4': false };
+    
+    function checkOdd(btn, isCorrect, rowId) {
+        if(oddScores[rowId]) return; // Already solved this row
+
+        const row = document.getElementById(rowId);
+        const buttons = row.querySelectorAll('.o-btn');
+
+        if(isCorrect) {
+            btn.classList.add('correct');
+            oddScores[rowId] = true;
+            
+            // Check if all 4 rows are solved
+            if(oddScores['odd-row-1'] && oddScores['odd-row-2'] && oddScores['odd-row-3'] && oddScores['odd-row-4']) {
+                document.getElementById('status-4').innerHTML = '<span class="kn-text">🎉 ವಿಭಾಗ ೪ ಪೂರ್ಣಗೊಂಡಿದೆ! ಮಹಾ ಪರೀಕ್ಷೆ ಪಾಸ್!</span><span class="en-text">🎉 Part 4 Completed! Mega Exam Passed!</span>';
+                completedSections.s4 = true; checkAllCompleted();
+            }
+        } else {
+            btn.classList.add('wrong');
+            setTimeout(() => btn.classList.remove('wrong'), 500);
+        }
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samskrita - Level 3: Saḥ, Sā, Tat</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Playfair+Display:wght@700;800&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Vibrant & Premium Colour Palette */
+            --bg-gradient: linear-gradient(135deg, #FAFAF9 0%, #FFF5F5 50%, #FEF9C3 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --accent-gold: #D4AF37;
+            --accent-gold-light: #FEF08A;
+            --maroon-rich: #781014;
+            --maroon-light: #FFF0F0;
+            --text-main: #1C1917;
+            --text-muted: #57534E;
+            --success: #059669;
+            --success-light: #D1FAE5;
+            --error: #E11D48;
+            --shadow-soft: 0 10px 40px -10px rgba(120, 16, 20, 0.1);
+            --shadow-hover: 0 20px 40px -10px rgba(120, 16, 20, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-gradient); color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 850px; padding: 0 20px 60px 20px; }
+
+        /* Navigation */
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; position: sticky; top: 0; background: rgba(250, 250, 249, 0.7); backdrop-filter: blur(15px); z-index: 100; border-bottom: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 30px; }
+        .home-btn { display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 800; color: var(--maroon-rich); font-size: 1.2rem; transition: transform 0.2s ease; }
+        .home-btn:hover { transform: translateY(-2px); }
+        .home-icon { background: var(--maroon-light); padding: 8px; border-radius: 12px; }
+        .progress-container { flex-grow: 1; margin: 0 30px; height: 12px; background: #E7E5E4; border-radius: 20px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);}
+        .progress-bar { height: 100%; width: 5%; background: linear-gradient(90deg, var(--maroon-rich), #D4AF37); border-radius: 20px; transition: width 0.5s ease; }
+        .lang-badge { font-weight: 800; color: var(--text-muted); background: white; padding: 8px 16px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #E7E5E4;}
+
+        /* Typography */
+        .sanskrit { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.8rem; font-weight: bold; color: var(--maroon-rich); }
+        .diacritic { font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #9F1239; font-weight: 600; letter-spacing: 0.5px; }
+        .title-main { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--maroon-rich); text-align: center; margin-bottom: 10px; font-weight: 800;}
+        .subtitle { text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* Glass Cards */
+        .glass-card { background: var(--card-bg); border-radius: 24px; padding: 35px; margin-bottom: 40px; box-shadow: var(--shadow-soft); border: 1px solid rgba(255,255,255,1); backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .glass-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        .section-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 2px dashed #E7E5E4; padding-bottom: 15px; }
+        .section-icon { font-size: 2rem; background: linear-gradient(135deg, var(--accent-gold-light) 0%, #FCD34D 100%); width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 16px; box-shadow: 0 4px 10px rgba(212,175,55,0.3);}
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--maroon-rich); font-weight: 800;}
+
+        /* Visual Rule Banner */
+        .rule-banner {
+            background: linear-gradient(135deg, var(--maroon-rich) 0%, #9F1239 100%);
+            padding: 20px 25px; border-radius: 16px; margin: 20px 0 30px 0;
+            color: white; font-size: 1.5rem; font-weight: 500; box-shadow: 0 8px 20px rgba(120, 16, 20, 0.2);
+            display: flex; justify-content: space-around; text-align: center; align-items: center;
+        }
+        .rule-highlight { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 8px; font-family: 'Tiro Devanagari Sanskrit'; font-size: 1.5rem;}
+
+        /* Dialogue Box */
+        .dialogue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .dialogue-box { background: white; padding: 25px 20px; border-radius: 20px; position: relative; border: 2px solid var(--maroon-light); text-align: center; transition: all 0.2s;}
+        .dialogue-box:hover { border-color: var(--accent-gold); transform: scale(1.02); }
+        .speaker-info { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 600; color: var(--text-muted); font-size: 2.5rem;}
+        .speak-btn { position: absolute; right: 15px; top: 15px; background: var(--maroon-light); border: none; color: var(--maroon-rich); width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+        .speak-btn:hover { background: var(--maroon-rich); color: white; transform: scale(1.1); box-shadow: 0 4px 10px rgba(120,16,20,0.3);}
+
+        /* SLOT MACHINE GAME STYLES */
+        .slot-machine-container { background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 20px; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; box-shadow: inset 0 4px 10px rgba(0,0,0,0.02);}
+        .lock-wheels { display: flex; gap: 15px; justify-content: center; width: 100%; margin-bottom: 25px; flex-wrap: wrap;}
+        .wheel-col { display: flex; flex-direction: column; align-items: center; background: white; border: 3px solid var(--accent-gold); border-radius: 16px; padding: 10px; box-shadow: 0 8px 20px rgba(212,175,55,0.2); width: 130px;}
+        .wheel-btn { background: #F1F5F9; border: none; width: 100%; height: 40px; border-radius: 8px; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; transition: 0.1s; }
+        .wheel-btn:active { background: #E2E8F0; transform: scale(0.95); }
+        .wheel-display { height: 90px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; position: relative; width: 100%;}
+        .wheel-text { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.8rem; font-weight: bold; color: var(--maroon-rich); transition: transform 0.2s ease; }
+        .wheel-sub { font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: #9F1239; font-weight: 600; margin-top: 5px;}
+        
+        .unlock-btn { width: 100%; max-width: 300px; background: linear-gradient(135deg, var(--maroon-rich) 0%, #9F1239 100%); color: white; padding: 18px; border: none; border-radius: 16px; font-size: 1.3rem; font-weight: 800; cursor: pointer; box-shadow: 0 6px 0 #4C0519; transition: all 0.1s; letter-spacing: 2px;}
+        .unlock-btn:active { transform: translateY(6px); box-shadow: 0 0 0 transparent; }
+        .unlock-btn.unlocked { background: var(--success); box-shadow: 0 6px 0 #064E3B; }
+
+        /* Voice Test Section */
+        .voice-card { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: white; border-radius: 20px; margin-bottom: 15px; border: 2px solid #F1F5F9; transition: 0.2s;}
+        .voice-card:hover { border-color: var(--accent-gold-light); box-shadow: 0 4px 12px rgba(212,175,55,0.1);}
+        .mic-btn { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); color: white; width: 60px; height: 60px; border-radius: 50%; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 8px 20px rgba(30, 27, 75, 0.3); transition: all 0.3s ease; }
+        .mic-btn.listening { background: var(--error); animation: ripple 1.5s infinite; }
+        @keyframes ripple { 0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(225, 29, 72, 0); } }
+
+        /* Quiz Section & Feedback */
+        .quiz-container { min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+        .q-text { font-size: 2.2rem; font-weight: 700; margin-bottom: 25px; text-align: center; color: var(--maroon-rich); font-family: 'Tiro Devanagari Sanskrit', serif;}
+        .opt-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
+        .opt-btn { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 15px 35px; border: 2px solid #E2E8F0; background: white; border-radius: 16px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 0 #E2E8F0; min-width: 150px; }
+        .opt-btn:hover { border-color: var(--accent-gold); transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-gold); }
+        .opt-btn:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+        .opt-btn.correct { background: var(--success-light); border-color: var(--success); box-shadow: 0 4px 0 var(--success); color: var(--success);}
+        .opt-btn.wrong { background: #FFE4E6; border-color: var(--error); box-shadow: 0 4px 0 var(--error); color: var(--error);}
+        
+        .feedback-msg { font-weight: 800; text-align: center; margin-top: 20px; font-size: 1.2rem; min-height: 30px; }
+        .stars { font-size: 4rem; color: #E7E5E4; text-align: center; letter-spacing: 10px; margin: 20px 0; }
+        .stars .filled { color: var(--accent-gold); text-shadow: 0 4px 15px rgba(212,175,55,0.4); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: scale(0); display: inline-block;}
+        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes shake { 0%, 100%{transform:translateX(0);} 25%{transform:translateX(-10px);} 75%{transform:translateX(10px);} } 
+        .shake { animation: shake 0.4s; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <!-- Premium Top Navigation -->
+    <nav class="top-nav">
+        <a href="index.html" class="home-btn">
+            <span class="home-icon">🏠</span> Home
+        </a>
+        <div class="progress-container">
+            <div class="progress-bar" id="main-progress"></div>
+        </div>
+        <div class="lang-badge">EN 🇬🇧</div>
+    </nav>
+
+    <div style="text-align: center;">
+        <h1 class="title-main">Saḥ, Sā, Tat</h1>
+        <p class="subtitle">Learn how to point to things far away (🔭) using pictures.</p>
+    </div>
+
+    <!-- 1. Observe & Absorb -->
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">👁️</div>
+            <h2 class="section-title">1. Observe</h2>
+        </div>
+        
+        <!-- VISUAL RULE BANNER -->
+        <div class="rule-banner">
+            <div>🔭👦 ➡️ <span class="rule-highlight">सः (Saḥ)</span></div>
+            <div>🔭👧 ➡️ <span class="rule-highlight">सा (Sā)</span></div>
+            <div>🔭🍎 ➡️ <span class="rule-highlight">तत् (Tat)</span></div>
+        </div>
+
+        <div class="dialogue-grid">
+            <div class="dialogue-box">
+                <button class="speak-btn" onclick="speak('सः रामः अस्ति।')">🔊</button>
+                <div class="speaker-info">🔭 ➡️ 👦</div>
+                <div class="sanskrit">सः रामः अस्ति।</div>
+                <div class="diacritic">Saḥ Rāmaḥ asti.</div>
+            </div>
+            
+            <div class="dialogue-box">
+                <button class="speak-btn" onclick="speak('सा सीता अस्ति।')">🔊</button>
+                <div class="speaker-info">🔭 ➡️ 👧</div>
+                <div class="sanskrit">सा सीता अस्ति।</div>
+                <div class="diacritic">Sā Sītā asti.</div>
+            </div>
+
+            <div class="dialogue-box">
+                <button class="speak-btn" onclick="speak('तत् फलम् अस्ति।')">🔊</button>
+                <div class="speaker-info">🔭 ➡️ 🍎</div>
+                <div class="sanskrit">तत् फलम् अस्ति।</div>
+                <div class="diacritic">Tat phalam asti.</div>
+            </div>
+
+            <div class="dialogue-box">
+                <button class="speak-btn" onclick="speak('सः बालकः अस्ति।')">🔊</button>
+                <div class="speaker-info">🔭 ➡️ 👦</div>
+                <div class="sanskrit">सः बालकः अस्ति।</div>
+                <div class="diacritic">Saḥ bālakaḥ asti.</div>
+            </div>
+
+            <div class="dialogue-box">
+                <button class="speak-btn" onclick="speak('सा बालिका अस्ति।')">🔊</button>
+                <div class="speaker-info">🔭 ➡️ 👧</div>
+                <div class="sanskrit">सा बालिका अस्ति।</div>
+                <div class="diacritic">Sā bālikā asti.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. THE SLOT MACHINE GAME -->
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">🎰</div>
+            <h2 class="section-title">2. Practise</h2>
+        </div>
+        <p style="text-align:center; margin-bottom:20px; font-size:1.1rem;">Tap the arrows to rotate the combination lock and match the picture perfectly!</p>
+        
+        <!-- Dev Note: Visual Target instead of English sentence -->
+        <div style="text-align:center; font-size:3.5rem; margin-bottom:20px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" id="slot-target-img">Loading...</div>
+        
+        <div class="slot-machine-container" id="slot-container">
+            <div class="lock-wheels">
+                <!-- Column 1 (Pronouns) -->
+                <div class="wheel-col">
+                    <button class="wheel-btn" onclick="spinSlot(0, -1)">▲</button>
+                    <div class="wheel-display">
+                        <div class="wheel-text" id="w0-sk">सः</div>
+                        <div class="wheel-sub" id="w0-en">Saḥ</div>
+                    </div>
+                    <button class="wheel-btn" onclick="spinSlot(0, 1)">▼</button>
+                </div>
+                <!-- Column 2 (Nouns) -->
+                <div class="wheel-col">
+                    <button class="wheel-btn" onclick="spinSlot(1, -1)">▲</button>
+                    <div class="wheel-display">
+                        <div class="wheel-text" id="w1-sk">रामः</div>
+                        <div class="wheel-sub" id="w1-en">Rāmaḥ</div>
+                    </div>
+                    <button class="wheel-btn" onclick="spinSlot(1, 1)">▼</button>
+                </div>
+                <!-- Column 3 (Verbs) -->
+                <div class="wheel-col">
+                    <button class="wheel-btn" onclick="spinSlot(2, -1)">▲</button>
+                    <div class="wheel-display">
+                        <div class="wheel-text" id="w2-sk">अस्ति</div>
+                        <div class="wheel-sub" id="w2-en">asti</div>
+                    </div>
+                    <button class="wheel-btn" onclick="spinSlot(2, 1)">▼</button>
+                </div>
+            </div>
+            <button class="unlock-btn" id="unlock-btn" onclick="checkUnlock()">🔓 शुद्धम्? (Check)</button>
+            <p id="slot-fb" class="feedback-msg" style="margin-bottom: 0;"></p>
+        </div>
+    </div>
+
+    <!-- 3. Voice Test -->
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">🎙️</div>
+            <h2 class="section-title">3. Pronunciation</h2>
+        </div>
+        
+        <div class="voice-card">
+            <div><div class="sanskrit">सः रामः अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Saḥ Rāmaḥ asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">सा सीता अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Sā Sītā asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">तत् फलम् अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Tat phalam asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">सः बालकः अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Saḥ bālakaḥ asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">सा बालिका अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Sā bālikā asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <p id="voice-fb" class="feedback-msg"></p>
+    </div>
+
+    <!-- 4. Auto-advance Quiz (Visual fill in the blanks) -->
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">🧠</div>
+            <h2 class="section-title">4. शुद्धम्? (Check)</h2>
+        </div>
+        <div class="quiz-container" id="quiz-box">
+            <div class="q-text" id="q-text">Loading...</div>
+            <div class="opt-grid" id="opt-container"></div>
+            <div id="quiz-fb" class="feedback-msg"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'hi-IN'; u.rate = 0.85;
+            window.speechSynthesis.speak(u);
+        }
+    }
+
+    // --- NEW SLOT MACHINE LOGIC (Visual Cues Only) ---
+    const slotData = [
+        [{sk:"सः", en:"Saḥ"}, {sk:"सा", en:"Sā"}, {sk:"तत्", en:"Tat"}], // Subject Pronouns
+        [{sk:"रामः", en:"Rāmaḥ"}, {sk:"सीता", en:"Sītā"}, {sk:"फलम्", en:"phalam"}, {sk:"बालकः", en:"bālakaḥ"}, {sk:"बालिका", en:"bālikā"}], // Nouns
+        [{sk:"अस्ति", en:"asti"}, {sk:"अस्मि", en:"asmi"}, {sk:"असि", en:"asi"}] // Verbs
+    ];
+
+    const slotChallenges = [
+        { img: "🔭👧 सीता", target: [1, 1, 0] }, // Sā Sītā asti
+        { img: "🔭🍎 फलम्", target: [2, 2, 0] }, // Tat phalam asti
+        { img: "🔭👦 रामः", target: [0, 0, 0] }, // Saḥ Rāmaḥ asti
+        { img: "🔭👧 बालिका", target: [1, 4, 0] }, // Sā bālikā asti
+        { img: "🔭👦 बालकः", target: [0, 3, 0] }  // Saḥ bālakaḥ asti
+    ];
+
+    let currentSlotChallenge = 0;
+    let slotPositions = [0, 0, 0]; 
+
+    function updateSlotUI(col) {
+        const item = slotData[col][slotPositions[col]];
+        document.getElementById(`w${col}-sk`).innerText = item.sk;
+        document.getElementById(`w${col}-en`).innerText = item.en;
+        
+        // Quick animation effect
+        const textEl = document.getElementById(`w${col}-sk`);
+        textEl.style.transform = 'scale(0.8)';
+        setTimeout(() => textEl.style.transform = 'scale(1)', 100);
+    }
+
+    function spinSlot(col, direction) {
+        const max = slotData[col].length;
+        slotPositions[col] += direction;
+        
+        // Loop around
+        if (slotPositions[col] < 0) slotPositions[col] = max - 1;
+        if (slotPositions[col] >= max) slotPositions[col] = 0;
+        
+        updateSlotUI(col);
+    }
+
+    function loadSlotChallenge() {
+        if(currentSlotChallenge >= slotChallenges.length) {
+            document.getElementById('slot-target-img').innerText = "🎉";
+            document.querySelector('.lock-wheels').style.display = 'none';
+            document.getElementById('unlock-btn').style.display = 'none';
+            document.getElementById('main-progress').style.width = '60%';
+            return;
+        }
+        
+        // Reset positions to 0 for a new challenge
+        slotPositions = [0, 0, 0];
+        updateSlotUI(0); updateSlotUI(1); updateSlotUI(2);
+        
+        document.getElementById('slot-target-img').innerText = slotChallenges[currentSlotChallenge].img;
+        document.getElementById('slot-fb').innerText = '';
+        
+        const btn = document.getElementById('unlock-btn');
+        btn.innerText = "🔓 शुद्धम्? (Check)";
+        btn.classList.remove('unlocked');
+    }
+
+    function checkUnlock() {
+        const target = slotChallenges[currentSlotChallenge].target;
+        const fb = document.getElementById('slot-fb');
+        const container = document.getElementById('slot-container');
+        const btn = document.getElementById('unlock-btn');
+        
+        if(slotPositions[0] === target[0] && slotPositions[1] === target[1] && slotPositions[2] === target[2]) {
+            fb.innerText = "✨ शुद्धम्! (Correct)";
+            fb.style.color = "var(--success)";
+            btn.innerText = "✓";
+            btn.classList.add('unlocked');
+            
+            // Speak the sentence
+            const sentence = `${slotData[0][slotPositions[0]].sk} ${slotData[1][slotPositions[1]].sk} ${slotData[2][slotPositions[2]].sk}`;
+            speak(sentence);
+            
+            setTimeout(() => {
+                currentSlotChallenge++;
+                loadSlotChallenge();
+            }, 2000);
+        } else {
+            fb.innerText = "❌ Try again.";
+            fb.style.color = "var(--error)";
+            container.classList.add('shake');
+            setTimeout(() => container.classList.remove('shake'), 500);
+        }
+    }
+
+    // Initialize Slot Machine
+    loadSlotChallenge();
+
+
+    // --- Voice Logic ---
+    function simulateVoice(btn) {
+        if(btn.classList.contains('listening')) return;
+        const fb = document.getElementById('voice-fb');
+        
+        document.querySelectorAll('.mic-btn').forEach(b => b.classList.remove('listening'));
+        btn.classList.add('listening');
+        fb.innerText = "Listening...";
+        fb.style.color = "var(--accent-gold)";
+
+        setTimeout(() => {
+            btn.classList.remove('listening');
+            if(Math.random() > 0.2) {
+                fb.innerText = "🌟 शुद्धम्! (Perfect)";
+                fb.style.color = "var(--success)";
+                btn.style.background = "var(--success)";
+                btn.innerText = "✓";
+                btn.disabled = true;
+            } else {
+                fb.innerText = "❌ Try again.";
+                fb.style.color = "var(--error)";
+            }
+        }, 2000);
+    }
+
+
+    // --- Quiz Logic (Visual Fill in the blanks) ---
+    const quizData = [
+        { q: "🔭👧 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> ।", opts: [{sk:"सा", en:"sā"}, {sk:"सः", en:"saḥ"}], ans: 0 },
+        { q: "🔭👦 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> रामः अस्ति।", opts: [{sk:"सः", en:"saḥ"}, {sk:"सा", en:"sā"}], ans: 0 },
+        { q: "🔭🍎 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> फलम् अस्ति।", opts: [{sk:"तत्", en:"tat"}, {sk:"सः", en:"saḥ"}], ans: 0 },
+        { q: "🔭👧 सा बालिका <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> ।", opts: [{sk:"अस्ति", en:"asti"}, {sk:"अस्मि", en:"asmi"}], ans: 0 },
+        { q: "🔭👨 सः जनकः <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> ।", opts: [{sk:"अस्ति", en:"asti"}, {sk:"असि", en:"asi"}], ans: 0 }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function renderQuiz() {
+        const qBox = document.getElementById('quiz-box');
+        const fb = document.getElementById('quiz-fb');
+        
+        if (currentQ >= quizData.length) {
+            document.getElementById('main-progress').style.width = '100%';
+            let starsHtml = "";
+            for(let i=1; i<=5; i++) {
+                let delay = i * 0.2;
+                starsHtml += (i <= score) ? `<span class='filled' style='animation-delay: ${delay}s'>★</span>` : "☆";
+            }
+            qBox.innerHTML = `
+                <h3 style="color:var(--maroon-rich); font-family:'Playfair Display'; font-size:2rem; text-align:center;">Module Complete!</h3>
+                <div class="stars">${starsHtml}</div>
+                <p style="font-size:1.3rem; color:var(--success); font-weight:800; text-align:center;">
+                    ${score} / 5
+                </p>
+            `;
+            return;
+        }
+
+        const data = quizData[currentQ];
+        document.getElementById('q-text').innerHTML = data.q;
+        fb.innerText = "";
+        
+        const optContainer = document.getElementById('opt-container');
+        optContainer.innerHTML = "";
+
+        data.opts.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = "opt-btn";
+            btn.innerHTML = `<span class="sanskrit" style="font-size:1.6rem; color:inherit;">${opt.sk}</span><span class="diacritic" style="color:inherit; margin-top:4px;">${opt.en}</span>`;
+            btn.onclick = () => handleAnswer(btn, idx, data.ans);
+            optContainer.appendChild(btn);
+        });
+    }
+
+    function handleAnswer(btn, selected, correct) {
+        const buttons = document.querySelectorAll('.opt-btn');
+        buttons.forEach(b => b.disabled = true);
+        const fb = document.getElementById('quiz-fb');
+
+        if(selected === correct) {
+            btn.classList.add('correct');
+            fb.innerText = "✨ शुद्धम्!";
+            fb.style.color = "var(--success)";
+            score++;
+            speak("उत्तमम्");
+        } else {
+            btn.classList.add('wrong');
+            buttons[correct].classList.add('correct');
+            fb.innerText = "❌";
+            fb.style.color = "var(--error)";
+        }
+
+        setTimeout(() => {
+            currentQ++;
+            renderQuiz();
+        }, 1500);
+    }
+
+    renderQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+import { useState } from 'react';
+const labels = { standard: 'Standard level question', simplified: 'Simplified after repeated errors', 'missed-concept': 'Focused on a previously missed concept', 'increased-challenge': 'Slightly increased challenge' };
+
+export default function PracticePanel({ level, attempt, hasPreviousAttempts, isLoading, error, onStart, onAnswer, onNext, onComplete, onRetryRequest }) {
+  const [answer, setAnswer] = useState('');
+  const current = attempt?.questions.at(-1); const submitted = Boolean(current?.feedback);
+  const results = attempt?.results || []; const wrong = results.filter((item) => !item.isCorrect).length; const right = results.length - wrong;
+  const submit = (event) => { event.preventDefault(); if (answer.trim() && !isLoading) { onAnswer(answer.trim()); setAnswer(''); } };
+  return <aside className="chat-panel practice-panel" aria-labelledby="practice-heading">
+    <div className="panel-title"><div><p className="eyebrow">Current exercise</p><h2 id="practice-heading">Level {level.number}: {level.difficulty}</h2></div><span className="pill">{attempt ? `Attempt ${attempt.number}${attempt.number > 1 ? ' · repeat' : ' · first'}` : 'Not started'}</span></div>
+    <div className="practice-meta"><p><strong>Objective:</strong> {level.objective}</p>{attempt && <p>Question {attempt.questions.length} · Correct {right} · Incorrect {wrong} · {attempt.number > 1 ? 'Repeat attempt' : 'First attempt'}</p>}</div>
+    {!attempt && <div className="empty-state action-state"><p>{hasPreviousAttempts ? 'Start a repeat attempt with exercise variations focused on earlier mistakes.' : 'Start the level to work through its exercises one at a time.'}</p><button className="send-button" onClick={onStart} disabled={isLoading}>{hasPreviousAttempts ? 'Retry level' : `Start Level ${level.number}`}</button></div>}
+    {attempt && <div className="messages" aria-live="polite">{current && <article className="question-card"><span className="adaptation">{labels[current.adaptation]}</span><p className="concept">Concept: {current.targetedConcept}</p><h3>{current.questionText}</h3>{current.hint && !submitted && <p className="hint">Hint: {current.hint}</p>}</article>}{isLoading && <p className="status loading">Preparing an exercise variation…</p>}{error && <div className="status error" role="alert"><span>{error}</span><button type="button" onClick={onRetryRequest} disabled={isLoading}>Retry exercise</button></div>}{submitted && <article className={current.feedback.isCorrect ? 'feedback correct' : 'feedback incorrect'}><strong>{current.feedback.isCorrect ? 'Correct' : 'Try a variation'}</strong><p>{current.feedback.feedback}</p>{current.feedback.hint && <p>Hint: {current.feedback.hint}</p>}</article>}</div>}
+    {attempt && !submitted && current && <form className="chat-form" onSubmit={submit}><label htmlFor="practice-answer">Your answer</label><textarea id="practice-answer" rows="3" value={answer} onChange={(event) => setAnswer(event.target.value)} disabled={isLoading} placeholder="Type your answer…" /><button className="send-button" disabled={isLoading || !answer.trim()}>Check answer</button></form>}
+    {attempt && submitted && <div className="attempt-actions"><button className="secondary-button" type="button" onClick={onNext} disabled={isLoading}>{current.feedback.isCorrect ? 'Next exercise' : 'Try adapted variation'}</button><button className="send-button" type="button" onClick={onComplete} disabled={isLoading}>Complete attempt</button></div>}
+  </aside>;
+}

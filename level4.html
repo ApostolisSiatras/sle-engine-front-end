@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samskrita - Level 4: Eṣaḥ, Eṣā, Etat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Playfair+Display:wght@700;800&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Vibrant & Premium Colour Palette */
+            --bg-gradient: linear-gradient(135deg, #FAFAF9 0%, #FFF5F5 50%, #FEF9C3 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --accent-gold: #D4AF37;
+            --accent-gold-light: #FEF08A;
+            --maroon-rich: #781014;
+            --maroon-light: #FFF0F0;
+            --text-main: #1C1917;
+            --text-muted: #57534E;
+            --success: #059669;
+            --success-light: #D1FAE5;
+            --error: #E11D48;
+            --shadow-soft: 0 10px 40px -10px rgba(120, 16, 20, 0.1);
+            --shadow-hover: 0 20px 40px -10px rgba(120, 16, 20, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-gradient); color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app-container { width: 100%; max-width: 850px; padding: 0 20px 60px 20px; }
+
+        /* Navigation */
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; position: sticky; top: 0; background: rgba(250, 250, 249, 0.7); backdrop-filter: blur(15px); z-index: 100; border-bottom: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 30px; }
+        .home-btn { display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 800; color: var(--maroon-rich); font-size: 1.2rem; transition: transform 0.2s ease; }
+        .home-btn:hover { transform: translateY(-2px); }
+        .home-icon { background: var(--maroon-light); padding: 8px; border-radius: 12px; }
+        .progress-container { flex-grow: 1; margin: 0 30px; height: 12px; background: #E7E5E4; border-radius: 20px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);}
+        .progress-bar { height: 100%; width: 5%; background: linear-gradient(90deg, var(--maroon-rich), #D4AF37); border-radius: 20px; transition: width 0.5s ease; }
+        .lang-badge { font-weight: 800; color: var(--text-muted); background: white; padding: 8px 16px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #E7E5E4;}
+
+        /* Typography */
+        .sanskrit { font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.8rem; font-weight: bold; color: var(--maroon-rich); }
+        .diacritic { font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #9F1239; font-weight: 600; letter-spacing: 0.5px; }
+        .title-main { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--maroon-rich); text-align: center; margin-bottom: 10px; font-weight: 800;}
+        .subtitle { text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* Glass Cards */
+        .glass-card { background: var(--card-bg); border-radius: 24px; padding: 35px; margin-bottom: 40px; box-shadow: var(--shadow-soft); border: 1px solid rgba(255,255,255,1); backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .glass-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        .section-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 2px dashed #E7E5E4; padding-bottom: 15px; }
+        .section-icon { font-size: 2rem; background: linear-gradient(135deg, var(--accent-gold-light) 0%, #FCD34D 100%); width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 16px; box-shadow: 0 4px 10px rgba(212,175,55,0.3);}
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--maroon-rich); font-weight: 800;}
+
+        /* Rule Banner */
+        .rule-banner { background: linear-gradient(135deg, var(--maroon-rich) 0%, #9F1239 100%); padding: 20px 25px; border-radius: 16px; margin: 20px 0 30px 0; color: white; font-size: 1.5rem; font-weight: 500; box-shadow: 0 8px 20px rgba(120, 16, 20, 0.2); display: flex; justify-content: space-around; text-align: center; align-items: center;}
+        .rule-highlight { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 8px; font-family: 'Tiro Devanagari Sanskrit'; font-size: 1.5rem;}
+
+        /* Contrast Grid (Observe) */
+        .contrast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;}
+        .contrast-box { background: white; padding: 20px; border-radius: 16px; border: 2px solid #F1F5F9; text-align: center; position: relative;}
+        .contrast-box.far { border-left: 6px solid #94A3B8; }
+        .contrast-box.near { border-left: 6px solid var(--accent-gold); }
+        .emoji-indicator { font-size: 2.5rem; margin-bottom: 10px; display: inline-block;}
+        .emoji-indicator.far { transform: scale(0.6); opacity: 0.7;}
+        .emoji-indicator.near { transform: scale(1.2); }
+
+        /* THE SWIPE GAME */
+        .swipe-game-area { background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 20px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 480px;} 
+        
+        .swipe-card { background: white; width: 280px; padding: 30px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; position: absolute; top: 30px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s; border: 2px solid var(--accent-gold-light); z-index: 2;}
+        .swipe-card.swipe-left { transform: translateX(-150%) rotate(-15deg); opacity: 0; }
+        .swipe-card.swipe-right { transform: translateX(150%) rotate(15deg); opacity: 0; }
+        
+        .card-emoji { font-size: 5rem; margin-bottom: 20px; }
+        .card-emoji.far { transform: scale(0.5); opacity: 0.6; }
+        .card-emoji.near { transform: scale(1.1); }
+        
+        .swipe-controls { display: flex; justify-content: space-between; width: 100%; margin-top: auto; position: absolute; bottom: 30px; padding: 0 20px; z-index: 10;}
+        .swipe-btn { padding: 15px 25px; border-radius: 16px; font-size: 1.3rem; font-weight: 800; cursor: pointer; border: none; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; gap: 5px; width: 45%; font-family: 'Tiro Devanagari Sanskrit', serif;}
+        .swipe-btn.btn-far { background: #F1F5F9; color: #475569; border: 2px solid #CBD5E1; }
+        .swipe-btn.btn-far:hover { background: #E2E8F0; transform: scale(1.05) rotate(-3deg); }
+        .swipe-btn.btn-near { background: var(--maroon-light); color: var(--maroon-rich); border: 2px solid #FECDD3; }
+        .swipe-btn.btn-near:hover { background: #FFE4E6; transform: scale(1.05) rotate(3deg); }
+
+        /* Voice & Quiz Styles */
+        .voice-card { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: white; border-radius: 20px; margin-bottom: 15px; border: 2px solid #F1F5F9; transition: 0.2s;}
+        .voice-card:hover { border-color: var(--accent-gold-light); box-shadow: 0 4px 12px rgba(212,175,55,0.1);}
+        .mic-btn { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); color: white; width: 60px; height: 60px; border-radius: 50%; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 8px 20px rgba(30, 27, 75, 0.3); transition: all 0.3s ease; }
+        .mic-btn.listening { background: var(--error); animation: ripple 1.5s infinite; }
+        @keyframes ripple { 0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(225, 29, 72, 0); } }
+
+        .quiz-container { min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+        .q-text { font-size: 2.2rem; font-weight: 700; margin-bottom: 25px; text-align: center; color: var(--maroon-rich); font-family: 'Tiro Devanagari Sanskrit', serif;}
+        .opt-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
+        .opt-btn { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 15px 35px; border: 2px solid #E2E8F0; background: white; border-radius: 16px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 0 #E2E8F0; min-width: 150px; }
+        .opt-btn:hover { border-color: var(--accent-gold); transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-gold); }
+        .opt-btn:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+        .opt-btn.correct { background: var(--success-light); border-color: var(--success); box-shadow: 0 4px 0 var(--success); color: var(--success);}
+        .opt-btn.wrong { background: #FFE4E6; border-color: var(--error); box-shadow: 0 4px 0 var(--error); color: var(--error);}
+        
+        .feedback-msg { font-weight: 800; text-align: center; margin-top: 20px; font-size: 1.2rem; min-height: 30px; }
+        .stars { font-size: 4rem; color: #E7E5E4; text-align: center; letter-spacing: 10px; margin: 20px 0; }
+        .stars .filled { color: var(--accent-gold); text-shadow: 0 4px 15px rgba(212,175,55,0.4); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: scale(0); display: inline-block;}
+        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes shake { 0%, 100%{transform:translateX(0);} 25%{transform:translateX(-10px);} 75%{transform:translateX(10px);} } 
+        .shake { animation: shake 0.4s; }
+
+        /* Golden Bonus Modal */
+        .golden-bonus { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); color: white; border-radius: 24px; padding: 40px; text-align: center; margin-top: 30px; box-shadow: 0 20px 40px rgba(30,27,75,0.4); animation: popIn 0.6s ease forwards; border: 2px solid var(--accent-gold); display: none;}
+        .bonus-title { font-family: 'Playfair Display'; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;}
+        .eq-row { display: flex; justify-content: center; align-items: center; gap: 15px; margin: 15px 0; font-family: 'Tiro Devanagari Sanskrit'; font-size: 2.2rem;}
+        .eq-sign { color: var(--accent-gold-light); font-family: 'Outfit'; font-weight: 800; }
+        .eq-en { font-family: 'Outfit'; font-size: 1.8rem; display: block; margin-top: -5px;}
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <nav class="top-nav">
+        <a href="index.html" class="home-btn">
+            <span class="home-icon">🏠</span> Home
+        </a>
+        <div class="progress-container">
+            <div class="progress-bar" id="main-progress"></div>
+        </div>
+        <div class="lang-badge">EN 🇬🇧</div>
+    </nav>
+
+    <div style="text-align: center;">
+        <h1 class="title-main">Eṣaḥ, Eṣā, Etat</h1>
+        <p class="subtitle">Just add 'ए' (E) to make it Near (📍).</p>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">👁️</div>
+            <h2 class="section-title">1. Observe</h2>
+        </div>
+        
+        <div class="rule-banner">
+            <div>🔭👦 ➡️ 📍👦 <span class="rule-highlight">एषः</span></div>
+            <div>🔭👧 ➡️ 📍👧 <span class="rule-highlight">एषा</span></div>
+            <div>🔭🍎 ➡️ 📍🍎 <span class="rule-highlight">एतत्</span></div>
+        </div>
+
+        <div class="contrast-grid">
+            <div class="contrast-box far">
+                <span class="emoji-indicator far">🔭👦</span>
+                <div class="sanskrit">सः रामः</div>
+                <div class="diacritic">Saḥ Rāmaḥ</div>
+            </div>
+            <div class="contrast-box near">
+                <span class="emoji-indicator near">📍👦</span>
+                <div class="sanskrit">एषः रामः</div>
+                <div class="diacritic">Eṣaḥ Rāmaḥ</div>
+            </div>
+            <div class="contrast-box far">
+                <span class="emoji-indicator far">🔭👧</span>
+                <div class="sanskrit">सा सीता</div>
+                <div class="diacritic">Sā Sītā</div>
+            </div>
+            <div class="contrast-box near">
+                <span class="emoji-indicator near">📍👧</span>
+                <div class="sanskrit">एषा सीता</div>
+                <div class="diacritic">Eṣā Sītā</div>
+            </div>
+            <div class="contrast-box far">
+                <span class="emoji-indicator far">🔭🍎</span>
+                <div class="sanskrit">तत् फलम्</div>
+                <div class="diacritic">Tat phalam</div>
+            </div>
+            <div class="contrast-box near">
+                <span class="emoji-indicator near">📍🍎</span>
+                <div class="sanskrit">एतत् फलम्</div>
+                <div class="diacritic">Etat phalam</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">🎴</div>
+            <h2 class="section-title">2. The Swipe Game</h2>
+        </div>
+        <p style="text-align:center; margin-bottom:20px; font-size:1.1rem;">Is it <strong>🔭 (Far)</strong> or <strong>📍 (Near)</strong>?</p>
+        
+        <div class="swipe-game-area" id="swipe-area">
+            
+            <div class="swipe-card" id="active-card">
+                <div class="card-emoji far" id="swipe-img">🔭👦</div>
+                <div class="sanskrit" style="font-size: 2.2rem; margin: 15px 0;" id="swipe-blank">___ बालकः</div>
+            </div>
+
+            <div class="swipe-controls">
+                <button class="swipe-btn btn-far" onclick="handleSwipe('far')">
+                    <span style="font-size:1.8rem;">👈 🔭</span>
+                    <span>सः / सा / तत्</span>
+                </button>
+                <button class="swipe-btn btn-near" onclick="handleSwipe('near')">
+                    <span style="font-size:1.8rem;">👉 📍</span>
+                    <span>एषः / एषा / एतत्</span>
+                </button>
+            </div>
+        </div>
+        <p id="swipe-fb" class="feedback-msg"></p>
+    </div>
+
+    <div class="glass-card">
+        <div class="section-header">
+            <div class="section-icon">🎙️</div>
+            <h2 class="section-title">3. Pronunciation</h2>
+        </div>
+        
+        <div class="voice-card">
+            <div><div class="sanskrit">एषः रामः अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Eṣaḥ Rāmaḥ asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">एषा सीता अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Eṣā Sītā asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">एतत् फलम् अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Etat phalam asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">एषः बालकः अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Eṣaḥ bālakaḥ asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <div class="voice-card">
+            <div><div class="sanskrit">एषा बालिका अस्ति।</div><div class="diacritic" style="margin-top: 5px;">Eṣā bālikā asti.</div></div>
+            <button class="mic-btn" onclick="simulateVoice(this)">🎤</button>
+        </div>
+        <p id="voice-fb" class="feedback-msg"></p>
+    </div>
+
+    <div class="glass-card" id="quiz-section">
+        <div class="section-header">
+            <div class="section-icon">🧠</div>
+            <h2 class="section-title">4. शुद्धम्? (Check)</h2>
+        </div>
+        <div class="quiz-container" id="quiz-box">
+            <div class="q-text" id="q-text">Loading...</div>
+            <div class="opt-grid" id="opt-container"></div>
+            <div id="quiz-fb" class="feedback-msg"></div>
+        </div>
+
+        <div class="golden-bonus" id="golden-bonus">
+            <div class="bonus-title">🏆 Pro-Tip Unlocked!</div>
+            <p style="font-size: 1.2rem; margin-bottom: 25px;">📍 (Near) has another set of words!</p>
+            
+            <div class="eq-row">
+                <span>एषः</span> <span class="eq-sign">=</span> <span>अयम्</span>
+            </div>
+            <span class="eq-en">📍👦</span>
+            
+            <div class="eq-row">
+                <span>एषा</span> <span class="eq-sign">=</span> <span>इयम्</span>
+            </div>
+            <span class="eq-en">📍👧</span>
+            
+            <div class="eq-row">
+                <span>एतत्</span> <span class="eq-sign">=</span> <span>इदम्</span>
+            </div>
+            <span class="eq-en">📍🍎</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'hi-IN'; u.rate = 0.85;
+            window.speechSynthesis.speak(u);
+        }
+    }
+
+    // --- VISUAL SWIPE GAME LOGIC ---
+    const swipeChallenges = [
+        { emoji: "📍👦", type: "near", sk: "___ बालकः", ans: "एषः बालकः", sound: "एषः बालकः अस्ति" },
+        { emoji: "🔭👧", type: "far", sk: "___ बालिका", ans: "सा बालिका", sound: "सा बालिका अस्ति" },
+        { emoji: "📍🍎", type: "near", sk: "___ फलम्", ans: "एतत् फलम्", sound: "एतत् फलम् अस्ति" },
+        { emoji: "🔭👨", type: "far", sk: "___ जनकः", ans: "सः जनकः", sound: "सः जनकः अस्ति" },
+        { emoji: "📍👩", type: "near", sk: "___ जननी", ans: "एषा जननी", sound: "एषा जननी अस्ति" }
+    ];
+
+    let currentSwipe = 0;
+    const activeCard = document.getElementById('active-card');
+    const swipeFb = document.getElementById('swipe-fb');
+
+    function loadSwipeCard() {
+        if(currentSwipe >= swipeChallenges.length) {
+            activeCard.style.display = 'none';
+            document.querySelector('.swipe-controls').style.display = 'none';
+            swipeFb.innerHTML = "🎉 <span style='color:var(--success)'>शुद्धम्!</span>";
+            document.getElementById('main-progress').style.width = '60%';
+            return;
+        }
+
+        const data = swipeChallenges[currentSwipe];
+        
+        // Reset Card classes
+        activeCard.className = 'swipe-card';
+        
+        // Update Content
+        const emojiEl = document.getElementById('swipe-img');
+        emojiEl.innerText = data.emoji;
+        emojiEl.className = `card-emoji ${data.type}`;
+        
+        document.getElementById('swipe-blank').innerText = data.sk;
+        swipeFb.innerText = "";
+    }
+
+    function handleSwipe(direction) {
+        const data = swipeChallenges[currentSwipe];
+        const buttons = document.querySelectorAll('.swipe-btn');
+        buttons.forEach(b => b.disabled = true); // Prevent double clicking
+
+        if (direction === data.type) {
+            // Correct!
+            activeCard.classList.add(`swipe-${direction === 'far' ? 'left' : 'right'}`);
+            swipeFb.innerText = `✨ शुद्धम्! (Correct)`;
+            swipeFb.style.color = "var(--success)";
+            speak(data.sound);
+            
+            setTimeout(() => {
+                currentSwipe++;
+                buttons.forEach(b => b.disabled = false);
+                loadSwipeCard();
+            }, 1000);
+        } else {
+            // Wrong!
+            swipeFb.innerText = "❌ Try again.";
+            swipeFb.style.color = "var(--error)";
+            activeCard.classList.add('shake');
+            
+            setTimeout(() => {
+                activeCard.classList.remove('shake');
+                buttons.forEach(b => b.disabled = false);
+            }, 500);
+        }
+    }
+
+    loadSwipeCard();
+
+
+    // --- Voice Logic ---
+    function simulateVoice(btn) {
+        if(btn.classList.contains('listening')) return;
+        const fb = document.getElementById('voice-fb');
+        
+        document.querySelectorAll('.mic-btn').forEach(b => b.classList.remove('listening'));
+        btn.classList.add('listening');
+        fb.innerText = "Listening...";
+        fb.style.color = "var(--accent-gold)";
+
+        setTimeout(() => {
+            btn.classList.remove('listening');
+            if(Math.random() > 0.2) {
+                fb.innerText = "🌟 शुद्धम्! (Perfect)";
+                fb.style.color = "var(--success)";
+                btn.style.background = "var(--success)";
+                btn.innerText = "✓";
+                btn.disabled = true;
+            } else {
+                fb.innerText = "❌ Try again.";
+                fb.style.color = "var(--error)";
+            }
+        }, 2000);
+    }
+
+
+    // --- Quiz Logic with VISUAL GOLDEN BONUS ---
+    const quizData = [
+        { q: "📍👦 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> रामः अस्ति।", opts: [{sk:"एषः", en:"eṣaḥ"}, {sk:"सः", en:"saḥ"}], ans: 0 },
+        { q: "📍👧 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> सीता अस्ति।", opts: [{sk:"एषा", en:"eṣā"}, {sk:"सा", en:"sā"}], ans: 0 },
+        { q: "📍🍎 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> फलम् अस्ति।", opts: [{sk:"एतत्", en:"etat"}, {sk:"तत्", en:"tat"}], ans: 0 },
+        { q: "🔭👦 सः बालकः अस्ति। <br>📍👦 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> बालकः अस्ति।", opts: [{sk:"एषः", en:"eṣaḥ"}, {sk:"एषा", en:"eṣā"}], ans: 0 },
+        { q: "🔭👧 सा बालिका अस्ति। <br>📍👧 <span style='border-bottom: 2px dashed; padding: 0 20px;'></span> बालिका अस्ति।", opts: [{sk:"एषा", en:"eṣā"}, {sk:"एतत्", en:"etat"}], ans: 0 }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function renderQuiz() {
+        const qBox = document.getElementById('quiz-box');
+        const fb = document.getElementById('quiz-fb');
+        const bonusCard = document.getElementById('golden-bonus');
+        
+        if (currentQ >= quizData.length) {
+            document.getElementById('main-progress').style.width = '100%';
+            let starsHtml = "";
+            for(let i=1; i<=5; i++) {
+                let delay = i * 0.2;
+                starsHtml += (i <= score) ? `<span class='filled' style='animation-delay: ${delay}s'>★</span>` : "☆";
+            }
+            qBox.innerHTML = `
+                <h3 style="color:var(--maroon-rich); font-family:'Playfair Display'; font-size:2rem; text-align:center;">Module Mastered!</h3>
+                <div class="stars">${starsHtml}</div>
+                <p style="font-size:1.3rem; color:var(--success); font-weight:800; text-align:center;">${score} / 5</p>
+            `;
+            
+            // REVEAL GOLDEN BONUS
+            setTimeout(() => {
+                bonusCard.style.display = "block";
+                // Auto scroll to bonus smoothly
+                bonusCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 800);
+            return;
+        }
+
+        const data = quizData[currentQ];
+        document.getElementById('q-text').innerHTML = data.q;
+        fb.innerText = "";
+        
+        const optContainer = document.getElementById('opt-container');
+        optContainer.innerHTML = "";
+
+        data.opts.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = "opt-btn";
+            btn.innerHTML = `<span class="sanskrit" style="font-size:1.6rem; color:inherit;">${opt.sk}</span><span class="diacritic" style="color:inherit; margin-top:4px;">${opt.en}</span>`;
+            btn.onclick = () => handleAnswer(btn, idx, data.ans);
+            optContainer.appendChild(btn);
+        });
+    }
+
+    function handleAnswer(btn, selected, correct) {
+        const buttons = document.querySelectorAll('.opt-btn');
+        buttons.forEach(b => b.disabled = true);
+        const fb = document.getElementById('quiz-fb');
+
+        if(selected === correct) {
+            btn.classList.add('correct');
+            fb.innerText = "✨ शुद्धम्! (Correct)";
+            fb.style.color = "var(--success)";
+            score++;
+            speak("उत्तमम्");
+        } else {
+            btn.classList.add('wrong');
+            buttons[correct].classList.add('correct');
+            fb.innerText = "❌ (Incorrect)";
+            fb.style.color = "var(--error)";
+        }
+
+        setTimeout(() => {
+            currentQ++;
+            renderQuiz();
+        }, 1500);
+    }
+
+    renderQuiz();
+</script>
+</body>
+</html>

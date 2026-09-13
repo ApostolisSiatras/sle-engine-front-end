@@ -1,0 +1,19 @@
+{
+  "name": "samskrita-levels-2-6-llm-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "sync:levels": "node scripts/sync-levels.mjs",
+    "dev": "npm run sync:levels && vite",
+    "build": "npm run sync:levels && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {}
+}
