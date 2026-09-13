@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050" role="img" aria-labelledby="title desc">
+  <title id="title">Samskrita level engine frontend architecture</title>
+  <desc id="desc">A diagram of the learner, the React interface, supplied HTML levels, local LLM connector, and the pass-and-unlock flow.</desc>
+  <defs>
+    <style>
+      .bg { fill:#fffaf2 } .title { font: 800 35px Arial, sans-serif; fill:#6f1720 } .sub { font: 17px Arial, sans-serif; fill:#66574f }
+      .group { stroke-width:2 } .groupTitle { font:800 21px Arial, sans-serif; fill:#fff } .h { font:800 19px Arial, sans-serif; fill:#31221d } .p { font:16px Arial, sans-serif; fill:#5d4a40 } .small { font:14px Arial, sans-serif; fill:#5d4a40 } .tiny { font:12px Arial, sans-serif; fill:#66574f }
+      .card { fill:#fff; stroke:#eadfd2; stroke-width:2 } .line { stroke:#9c7051; stroke-width:3; fill:none; marker-end:url(#arrow) } .dash { stroke:#9c7051; stroke-width:3; fill:none; stroke-dasharray:8 7; marker-end:url(#arrow) }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9c7051"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="1050"/>
+  <text x="800" y="54" text-anchor="middle" class="title">Samskrita Level Engine — Frontend Architecture</text>
+  <text x="800" y="84" text-anchor="middle" class="sub">A local-first React learning flow: supplied lessons stay intact; the LLM quietly adapts practice after mistakes.</text>
+
+  <rect x="35" y="120" width="275" height="535" rx="18" fill="#fff0df" stroke="#d3a75b" class="group"/>
+  <rect x="35" y="120" width="275" height="52" rx="18" fill="#8b2630"/><text x="58" y="153" class="groupTitle">1. LEARNER JOURNEY</text>
+  <rect x="58" y="195" width="229" height="88" rx="12" class="card"/><text x="78" y="226" class="h">Choose an available level</text><text x="78" y="252" class="p">Level 2 begins unlocked</text>
+  <path d="M172 283v42" class="line"/>
+  <rect x="58" y="327" width="229" height="88" rx="12" class="card"/><text x="78" y="358" class="h">Study supplied lesson</text><text x="78" y="384" class="p">Read and use its HTML activity</text>
+  <path d="M172 415v42" class="line"/>
+  <rect x="58" y="459" width="229" height="105" rx="12" class="card"/><text x="78" y="490" class="h">Practise one question</text><text x="78" y="516" class="p">Answer • get feedback</text><text x="78" y="541" class="p">Continue or try a variation</text>
+  <path d="M172 564v42" class="line"/>
+  <text x="172" y="632" text-anchor="middle" class="small">Keyboard and touch-friendly controls</text>
+
+  <rect x="345" y="120" width="465" height="535" rx="18" fill="#fff6e8" stroke="#d3a75b" class="group"/>
+  <rect x="345" y="120" width="465" height="52" rx="18" fill="#a46612"/><text x="368" y="153" class="groupTitle">2. REACT FRONTEND (VITE)</text>
+  <rect x="370" y="195" width="198" height="118" rx="12" class="card"/><text x="390" y="226" class="h">App.jsx</text><text x="390" y="253" class="p">Active level</text><text x="390" y="278" class="p">Attempts and pass state</text>
+  <rect x="587" y="195" width="198" height="118" rx="12" class="card"/><text x="607" y="226" class="h">LevelList</text><text x="607" y="253" class="p">Level catalogue</text><text x="607" y="278" class="p">Locks later levels</text>
+  <rect x="370" y="342" width="198" height="126" rx="12" class="card"/><text x="390" y="373" class="h">LevelContent</text><text x="390" y="400" class="p">Loads original HTML</text><text x="390" y="425" class="p">in a sandboxed iframe</text>
+  <rect x="587" y="342" width="198" height="126" rx="12" class="card"/><text x="607" y="373" class="h">PracticePanel</text><text x="607" y="400" class="p">Question, response, hint</text><text x="607" y="425" class="p">Correct / retry feedback</text>
+  <rect x="370" y="500" width="415" height="122" rx="12" fill="#f8ead1" stroke="#dfbf80" stroke-width="2"/><text x="392" y="532" class="h">Learner-facing UI</text><text x="392" y="559" class="p">No chat, prompts, model settings, or model messages</text><text x="392" y="588" class="p">Load and pass animations; reduced-motion safe</text>
+
+  <rect x="845" y="120" width="335" height="535" rx="18" fill="#edf5ed" stroke="#8aae91" class="group"/>
+  <rect x="845" y="120" width="335" height="52" rx="18" fill="#397647"/><text x="868" y="153" class="groupTitle">3. LEVEL CONTENT</text>
+  <rect x="870" y="195" width="285" height="110" rx="12" class="card"/><text x="892" y="227" class="h">src/data/levels.js</text><text x="892" y="254" class="p">Levels 2–6, each with:</text><text x="892" y="280" class="p">tag, objective, title, file</text>
+  <path d="M1012 305v35" class="line"/>
+  <rect x="870" y="342" width="285" height="110" rx="12" class="card"/><text x="892" y="374" class="h">Supplied HTML</text><text x="892" y="401" class="p">level2.html to level6.html</text><text x="892" y="427" class="p">Original topics stay intact</text>
+  <path d="M1012 452v35" class="line"/>
+  <rect x="870" y="489" width="285" height="110" rx="12" class="card"/><text x="892" y="521" class="h">Sync and serve</text><text x="892" y="548" class="p">scripts/sync-levels.mjs</text><text x="892" y="574" class="p">→ public/levels → iframe</text>
+
+  <rect x="1215" y="120" width="350" height="535" rx="18" fill="#fdf0ef" stroke="#d5877d" class="group"/>
+  <rect x="1215" y="120" width="350" height="52" rx="18" fill="#a83c34"/><text x="1238" y="153" class="groupTitle">4. ADAPTIVE LOCAL LLM</text>
+  <rect x="1240" y="195" width="300" height="78" rx="12" class="card"/><text x="1260" y="226" class="h">Incorrect answer</text><text x="1260" y="252" class="p">Triggers an asynchronous adaptation</text>
+  <path d="M1390 273v26" class="line"/>
+  <rect x="1240" y="301" width="300" height="100" rx="12" class="card"/><text x="1260" y="332" class="h">Structured context only</text><text x="1260" y="359" class="p">Level, objective, source text, question,</text><text x="1260" y="383" class="p">answer, attempts, prior mistakes</text>
+  <path d="M1390 401v26" class="line"/>
+  <rect x="1240" y="429" width="300" height="100" rx="12" class="card"/><text x="1260" y="460" class="h">llmClient.js validates output</text><text x="1260" y="487" class="p">Question + expected guidance + target</text><text x="1260" y="511" class="p">concept + difficulty + optional hint</text>
+  <path d="M1390 529v26" class="line"/>
+  <rect x="1240" y="557" width="300" height="70" rx="12" class="card"/><text x="1260" y="587" class="h">New in-app exercise variation</text><text x="1260" y="612" class="p">Never a learner-facing conversation</text>
+
+  <path d="M310 389h55" class="line"/><path d="M810 405h55" class="line"/><path d="M1180 405h55" class="line"/>
+  <path d="M1390 655v48H686v-58" class="dash"/>
+  <text x="1130" y="696" class="tiny">Validated variation returns to PracticePanel</text>
+
+  <rect x="35" y="705" width="1530" height="285" rx="18" fill="#fff" stroke="#dfcdbf" stroke-width="2"/>
+  <text x="65" y="745" class="h">5. PASS, UNLOCK, AND RESILIENCE</text>
+  <rect x="65" y="775" width="310" height="145" rx="14" fill="#fff4dd" stroke="#d3a75b" stroke-width="2"/><text x="88" y="812" class="h">Attempt completion rule</text><text x="88" y="842" class="p">At least 3 answered questions</text><text x="88" y="869" class="p">and at least 70% correct</text><text x="88" y="897" class="small">Score is calculated in App.jsx</text>
+  <path d="M375 847h65" class="line"/>
+  <rect x="445" y="775" width="310" height="145" rx="14" fill="#ebf9ed" stroke="#8aae91" stroke-width="2"/><text x="468" y="812" class="h">Pass outcome</text><text x="468" y="842" class="p">Save passed attempt in memory</text><text x="468" y="869" class="p">Unlock the immediately next level</text><text x="468" y="897" class="small">Sidebar and handler both enforce it</text>
+  <path d="M755 847h65" class="line"/>
+  <rect x="825" y="775" width="310" height="145" rx="14" fill="#f0f4ff" stroke="#93a9d9" stroke-width="2"/><text x="848" y="812" class="h">Visual response</text><text x="848" y="842" class="p">Level content fades in on selection</text><text x="848" y="869" class="p">Pass banner animates and offers Continue</text><text x="848" y="897" class="small">Animations disabled for reduced motion</text>
+  <path d="M1135 847h65" class="line"/>
+  <rect x="1205" y="775" width="330" height="145" rx="14" fill="#fdf0ef" stroke="#d5877d" stroke-width="2"/><text x="1228" y="812" class="h">Local LLM unavailable?</text><text x="1228" y="842" class="p">Show timeout / connection / output error</text><text x="1228" y="869" class="p">Retry the exercise request safely</text><text x="1228" y="897" class="small">Endpoint remains configurable in .env</text>
+
+  <text x="800" y="1025" text-anchor="middle" class="tiny">Frontend only • state is in memory and resets on refresh • local OpenAI-compatible endpoint via Vite proxy</text>
+</svg>
